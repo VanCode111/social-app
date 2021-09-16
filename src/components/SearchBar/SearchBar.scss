@@ -1,0 +1,35 @@
+.search-bar {
+  width: 200px;
+  height: 44px;
+  background: #f6f6f6;
+  border-radius: 18px;
+  overflow: hidden;
+  display: flex;
+  width: 267px;
+  &__input {
+    height: 100%;
+    width: calc(100% - 61px);
+    overflow: none;
+    border: none;
+    background-color: transparent;
+    padding-left: 14px;
+    outline: none;
+  }
+  &__button {
+    width: 61px;
+    height: 100%;
+    border: none;
+    cursor: pointer;
+    background: rgba(0, 172, 255, 0.46);
+    position: relative;
+    &::before {
+      content: "";
+      background: url("../../assets/img/Search.svg") no-repeat center;
+      position: absolute;
+      left: calc(50% - 10px);
+      top: calc(50% - 10px);
+      width: 20px;
+      height: 20px;
+    }
+  }
+}

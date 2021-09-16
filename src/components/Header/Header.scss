@@ -1,0 +1,18 @@
+@import "../../style/variables";
+.header {
+  background-color: $white;
+  &__inner {
+    height: 76px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  &__search-box {
+    padding-left: 11px;
+    border-left: 1px solid rgba(0, 0, 0, 0.28);
+  }
+  &__menu {
+    align-self: flex-end;
+    margin-left: auto;
+  }
+}
