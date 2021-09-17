@@ -13,7 +13,7 @@ import {
 
 const IconTabs = [
   {
-    path: "/",
+    path: "/feeds",
     icon: <HomeIcon width="28" height="28" />,
   },
   {
@@ -33,7 +33,7 @@ const IconTabs = [
     icon: <MessageIcon width="28" height="28" />,
   },
   {
-    path: "/comunitys",
+    path: "/profile",
     icon: <PersonIcon width="28" height="28" />,
   },
 ];
@@ -49,7 +49,7 @@ function Header() {
           <MenuTabs IconTabs={IconTabs} className="header__menu" />
 
           <div className="header__search-box">
-            <SearchBar placeholder="Search for anything (Jobs)" />
+            <SearchBar placeholder="Поиск" />
           </div>
         </div>
       </div>

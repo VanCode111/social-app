@@ -1,0 +1,32 @@
+.user-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-decoration: none;
+  color: black;
+  border-radius: 18px;
+
+  &__left {
+    display: flex;
+    align-items: center;
+  }
+  &__name {
+    margin-left: 14px;
+  }
+  &__btn {
+    border: 1px solid #00acff;
+    color: #00acff;
+    font-family: Roboto;
+    cursor: pointer;
+    border-radius: 8px;
+    padding: 8px;
+    background-color: transparent;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 14px;
+    &:hover {
+      color: #fff;
+      background-color: #00acff;
+    }
+  }
+}

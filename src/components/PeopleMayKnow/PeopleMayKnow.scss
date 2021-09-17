@@ -1,0 +1,15 @@
+.mayknow {
+  padding: 22px;
+  background-color: #fff;
+  border-radius: 18px;
+  &__title {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+    color: #212121;
+    margin-bottom: 26px;
+  }
+  &__user {
+    margin-bottom: 24px;
+  }
+}
