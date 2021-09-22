@@ -1,0 +1,72 @@
+.music__wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 18px;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+.progress {
+  opacity: 0;
+}
+.progress.visible {
+  opacity: 1;
+}
+.music-item {
+  padding: 10px;
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.027);
+  }
+
+  &:hover &__icon {
+    &::before {
+      content: "";
+      background: url("../../assets/img/play.svg") no-repeat center;
+      background-color: rgba(0, 0, 0, 0.568);
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      z-index: 100;
+      left: 0;
+      top: 0;
+    }
+    &.play::before {
+      display: none;
+    }
+  }
+  &__left {
+    display: flex;
+    align-items: center;
+  }
+  &__ava {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    position: relative;
+  }
+  &__time {
+    color: #666666;
+  }
+  &__icon {
+    position: relative;
+    height: 40px;
+    width: 40px;
+    margin-right: 15px;
+    overflow: hidden;
+    border-radius: 10px;
+    &.play {
+      &::after {
+        content: "";
+        background: url("../../assets/img/pause.svg") no-repeat center;
+        background-color: black;
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        width: 100%;
+        z-index: 10000;
+        height: 100%;
+        opacity: 0.8;
+      }
+    }
+  }
+}

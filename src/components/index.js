@@ -8,3 +8,4 @@ export { default as Posts } from "./Posts/Posts";
 export { default as Post } from "./Post/Post";
 export { default as Profile } from "./Profile/Profile";
 export { default as Home } from "./Home/Home";
+export { default as MenuPlayer } from "./MenuPlayer/MenuPlayer";

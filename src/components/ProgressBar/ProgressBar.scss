@@ -1,0 +1,12 @@
+.progress-bar {
+  width: 100%;
+  height: 5px;
+  border-radius: 100px;
+  overflow: hidden;
+  background-color: rgba(0, 0, 0, 0.158);
+  &__check {
+    background-color: #00acff;
+    height: 100%;
+    transition: all 0.3s;
+  }
+}

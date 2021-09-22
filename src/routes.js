@@ -2,6 +2,7 @@ import Feeds from "./components/Feeds/Feeds";
 import Profile from "./components/Profile/Profile";
 import { Auth, Main } from "./pages";
 import Comunity from "./pages/Comunity";
+import Music from "./components/Music/Music";
 
 export const routes = [
   {
@@ -33,6 +34,6 @@ export const mainRoutes = [
   },
   {
     path: "/profile",
-    component: Profile,
+    component: Music,
   },
 ];
