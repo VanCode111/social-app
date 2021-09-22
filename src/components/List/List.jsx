@@ -9,7 +9,8 @@ function List({ items, playMusic, currentMusic }) {
       {items.map((item) => {
         return (
           <MusicItem
-            currentMusic={currentMusic?.id === item.id ? currentMusic : null}
+            key={item.id}
+            curr={currentMusic?.id === item.id ? currentMusic : null}
             playMusic={playMusic}
             className="list__music"
             item={item}

@@ -10,7 +10,6 @@ function Music() {
   const [tracks, setTracks] = useState([]);
   const [currentMusic, setCurrentMusic] = useState(null);
 
-  console.log(currentMusic);
   const disableMusic = async (audio, disable) => {
     if (interval) {
       clearInterval(interval);
@@ -49,10 +48,12 @@ function Music() {
       audio.audio.play();
       audio.play = true;
     } else if (currentMusic.id != id) {
+      console.log("safasf");
       currentMusic.audio.pause();
       audio = { audio: new Audio(url), id };
       audio.play = true;
       disableMusic(audio, false);
+      console.log("audio: ", audio);
     } else {
       audio = { ...currentMusic };
       console.log(audio);
@@ -64,7 +65,7 @@ function Music() {
         disableMusic(audio, false);
       }
     }
-    setCurrentMusic(audio);
+    setCurrentMusic({ ...audio });
   };
   useEffect(() => {
     const getTracks = async () => {

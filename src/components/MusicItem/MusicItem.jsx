@@ -2,22 +2,26 @@ import React, { useState, useEffect } from "react";
 import "./MusicItem.scss";
 import ProgressBar from "../../components/ProgressBar/ProgressBar";
 
-let interval;
-function MusicItem({ item, className, playMusic, currentMusic }) {
-  console.log(currentMusic);
+function MusicItem({ item, className, playMusic, curr }) {
+  const [intervals, setIntervals] = useState(null);
+  curr = curr;
   const [curTime, setCurTime] = useState(0);
-  const duration = currentMusic ? currentMusic.audio.duration : null;
+  let duration = curr ? curr.audio.duration : null;
   useEffect(() => {
-    clearInterval(interval);
-    if (currentMusic) {
-      interval = setInterval(() => {
-        setCurTime(currentMusic.audio.currentTime);
-      }, 100);
-    } else if (interval) {
-      clearInterval(interval);
+    if (intervals) {
+      clearInterval(intervals);
     }
-  }, [currentMusic]);
-  console.log("time: ", curTime);
+    if (curr != null) {
+      const interval = setInterval(() => {
+        setCurTime(curr.audio.currentTime);
+
+        if (!curr.play) {
+          clearInterval(interval);
+        }
+      }, 100);
+      setIntervals(interval);
+    }
+  }, [curr]);
   return (
     <div
       onClick={() => playMusic(item.url, item.id)}
@@ -28,11 +32,7 @@ function MusicItem({ item, className, playMusic, currentMusic }) {
           <div
             className={
               "music-item__icon " +
-              (currentMusic != null
-                ? currentMusic.play == true
-                  ? "play"
-                  : "pause"
-                : "")
+              (curr != null ? (curr.play == true ? "play" : "pause") : "")
             }
           >
             <img src={item.image} alt="" className="music-item__ava" />
@@ -45,7 +45,7 @@ function MusicItem({ item, className, playMusic, currentMusic }) {
         <p className="music-item__time">{"3:50"}</p>
       </div>
       <ProgressBar
-        className={"progress " + (currentMusic ? "visible" : "")}
+        className={"progress " + (curr ? "visible" : "")}
         current={curTime}
         end={duration}
       />
