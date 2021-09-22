@@ -5,7 +5,7 @@ function LeftMenu({ audio }) {
   const currentMusic = useSelector((store) => store.currentMusic);
   return (
     <div className="left-menu">
-      {currentMusic && <MenuPlayer audio={audio} />}
+      {currentMusic && <MenuPlayer currentMusic={currentMusic} audio={audio} />}
     </div>
   );
 }

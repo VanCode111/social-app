@@ -22,6 +22,14 @@
 .player-buttons {
   display: flex;
   align-items: center;
+  &__item {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+  }
+  &__left svg {
+    transform: rotate(180deg);
+  }
   &__item + &__item {
     margin-left: 15px;
   }

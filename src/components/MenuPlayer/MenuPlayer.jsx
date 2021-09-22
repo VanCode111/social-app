@@ -2,66 +2,48 @@ import React, { useState } from "react";
 import "./MenuPlayers.scss";
 import PlayIcon from "../Icons/PlayIcon";
 import PauseIcon from "../Icons/PauseIcon";
+import Arrow from "../Icons/Arrow";
+import { useDispatch, useSelector } from "react-redux";
+import { setMusic } from "../../store";
+import { playMusic, changeTrack } from "../../audio";
 
-const audios = [
-  {
-    url: "https://m.vk.com/mp3/audio_api_unavailable.mp3?extra=encodeextraurl",
-  },
-  {
-    title: "Bad Habits",
-    url: "https://s264iva.storage.yandex.net/get-mp3/968aaae3e9b3ac302caf6a00007805ab/0005cc550782c74a/rmusic/U2FsdGVkX18QHjaTXUCOfXSYEJHs_ixpCbQWpzvqMFlDGYHG5I6GwgbsavOF3kZxufQWdK6Y5PS-bCQyawQnTW4fTklUJYfLK_K8Afautio/7945871740fa505642392543f1528653ab7771812be8b6724a104b46df8a3219/36171?track-id=85864771&play=false",
-  },
-];
-
-function MenuPlayer({ audio }) {
-  const [play, setPlay] = useState(false);
+function MenuPlayer({ audio, currentMusic }) {
+  const dispatch = useDispatch();
+  const tracks = useSelector((state) => state.tracks);
   const [activeAudio, setActiveAudio] = useState(null);
-  const handleAudio = () => {
-    if (activeAudio === null) {
-      setActiveAudio(0);
-      audio.src = audios[0].url;
-    }
-
-    if (play == false) {
-      audio.play();
-    } else if (play == true) {
-      audio.pause();
-    }
-
-    setPlay((prev) => !prev);
+  const handleAudio = async () => {
+    const { music } = await playMusic(
+      currentMusic.url,
+      currentMusic.id,
+      currentMusic.title,
+      audio,
+      currentMusic
+    );
+    dispatch(setMusic(music));
   };
 
-  const changeAudio = (direction) => {
-    console.log(activeAudio);
-    if (direction == "right") {
-      const index = activeAudio < audios.length - 1 ? activeAudio + 1 : 0;
-      if (audio) {
-        audio.pause();
-      }
-      console.log(activeAudio);
-      audio = new Audio(audios[index].url);
-      if (play) {
-        audio.play();
-      }
-      setActiveAudio(index);
-    }
+  const handleChangeTrack = async (direction) => {
+    const { music } = await changeTrack(direction, audio, tracks, currentMusic);
+    console.log(music);
+    dispatch(setMusic(music));
   };
   return (
     <div className="menu-player">
-      <p className="menu-player__title">
-        {activeAudio ? audios[activeAudio].title : " "}
-      </p>
+      <p className="menu-player__title">{currentMusic.title}</p>
 
       <div className="menu-player__block">
         <div className="player-buttons">
-          <button className="player-buttons__left player-buttons__item">
-            -
+          <button
+            onClick={() => handleChangeTrack("left")}
+            className="player-buttons__left player-buttons__item"
+          >
+            <Arrow />
           </button>
           <button
             onClick={handleAudio}
             className="player-buttons__play player-buttons__item"
           >
-            {!play ? (
+            {!currentMusic.play ? (
               <div className="play">
                 <PlayIcon />{" "}
               </div>
@@ -70,10 +52,10 @@ function MenuPlayer({ audio }) {
             )}
           </button>
           <button
-            className="player-buttons__left player-buttons__item"
-            onClick={() => changeAudio("right")}
+            onClick={() => handleChangeTrack("right")}
+            className="player-buttons__right player-buttons__item"
           >
-            -
+            <Arrow />
           </button>
         </div>
       </div>
