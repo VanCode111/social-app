@@ -42,7 +42,7 @@ function MusicItem({ item, className, playMusic, curr, audio }) {
             <p className="music-item__title">{item.title}</p>
           </div>
         </div>
-        <p className="music-item__time">{"3:50"}</p>
+        <p className="music-item__time">{item.duration}</p>
       </div>
       <ProgressBar
         className={"progress " + (curr ? "visible" : "")}

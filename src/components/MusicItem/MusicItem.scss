@@ -30,7 +30,8 @@
       left: 0;
       top: 0;
     }
-    &.play::before {
+    &.play::before,
+    &.pause::before {
       display: none;
     }
   }
@@ -54,7 +55,9 @@
     margin-right: 15px;
     overflow: hidden;
     border-radius: 10px;
-    &.play {
+
+    &.play,
+    &.pause {
       &::after {
         content: "";
         background: url("../../assets/img/pause.svg") no-repeat center;
@@ -66,6 +69,11 @@
         z-index: 10000;
         height: 100%;
         opacity: 0.8;
+      }
+    }
+    &.pause {
+      &::after {
+        background-image: url("../../assets/img/play.svg");
       }
     }
   }

@@ -5,6 +5,7 @@ import MusicItem from "../MusicItem/MusicItem";
 import "./Music.scss";
 import { useSelector, useDispatch } from "react-redux";
 import { setMusic } from "../../store";
+import Loader from "../../components/Loader/Loader";
 
 let interval;
 
@@ -13,6 +14,7 @@ function Music({ audio }) {
   const dispatch = useDispatch();
   const [tracks, setTracks] = useState([]);
   const currentMusic = useSelector((store) => store.currentMusic);
+  const [loading, setLoading] = useState(true);
   console.log(currentMusic);
   const disableMusic = async (a, disable) => {
     if (interval) {
@@ -72,6 +74,7 @@ function Music({ audio }) {
       const response = await fetch("http://localhost:3000/tracks");
       const res = await response.json();
       setTracks(res);
+      setLoading(false);
     };
     getTracks();
   }, []);
@@ -79,6 +82,9 @@ function Music({ audio }) {
     <div className="music">
       <h2 className="music__title">Музыка </h2>
       <List
+        loading={loading}
+        loader={<Loader className="music__loader" />}
+        loaderList={5}
         playMusic={playMusic}
         currentMusic={currentMusic}
         component={MusicItem}
