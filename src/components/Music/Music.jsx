@@ -7,6 +7,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { setMusic, setTracks } from "../../store";
 import Loader from "../../components/Loader/Loader";
 import { playMusic } from "../../audio";
+import Tabs from "../Tabs/Tabs";
+import OwnMusic from "../OwnMusic/OwnMusic";
 
 let interval;
 
@@ -42,17 +44,14 @@ function Music({ audio }) {
   }, []);
   return (
     <div className="music">
-      <h2 className="music__title">Музыка </h2>
-      <List
-        loading={loading}
-        loader={<Loader className="music__loader" />}
-        loaderList={5}
-        playMusic={handleMusic}
-        currentMusic={currentMusic}
-        component={MusicItem}
-        items={tracks}
-        audio={audio}
-      />
+      <Tabs
+        tabs={[
+          { name: "Моя музыка", id: 1 },
+          { name: "Рекомендации", id: 2 },
+        ]}
+      >
+        <OwnMusic handleMusic={handleMusic} audio={audio} id={1} />
+      </Tabs>
     </div>
   );
 }

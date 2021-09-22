@@ -1,0 +1,29 @@
+.tabs {
+  &__top {
+    display: flex;
+    margin-bottom: 15px;
+  }
+  &__tab {
+    color: #666;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 20px;
+    padding-bottom: 10px;
+    margin-right: 15px;
+    &.active {
+      color: black;
+      position: relative;
+      &:before {
+        content: "";
+        width: 100%;
+        height: 3px;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        z-index: 100;
+        border-radius: 100px;
+        background-color: #00acff;
+      }
+    }
+  }
+}
