@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./MenuPlayers.scss";
 import PlayIcon from "../Icons/PlayIcon";
 import PauseIcon from "../Icons/PauseIcon";
@@ -22,6 +22,12 @@ function MenuPlayer({ audio, currentMusic }) {
     dispatch(setMusic(music));
   };
 
+  useEffect(() => {
+    audio.addEventListener("ended", () => {
+      handleChangeTrack("right");
+    });
+  }, []);
+
   const handleChangeTrack = async (direction) => {
     const { music } = await changeTrack(direction, audio, tracks, currentMusic);
     console.log(music);
@@ -29,7 +35,10 @@ function MenuPlayer({ audio, currentMusic }) {
   };
   return (
     <div className="menu-player">
-      <p className="menu-player__title">{currentMusic.title}</p>
+      <div className="menu-player__top-block">
+        <img src={currentMusic.icon} alt="ava" className="menu-player__ava" />
+        <p className="menu-player__title">{currentMusic.title}</p>
+      </div>
 
       <div className="menu-player__block">
         <div className="player-buttons">

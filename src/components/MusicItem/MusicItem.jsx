@@ -24,7 +24,7 @@ function MusicItem({ item, className, playMusic, curr, audio }) {
   }, [curr]);
   return (
     <div
-      onClick={() => playMusic(item.url, item.id, item.title)}
+      onClick={() => playMusic(item.url, item.id, item.title, item.image)}
       className={"music-item " + (className ? className : "")}
     >
       <div className="music__wrapper">

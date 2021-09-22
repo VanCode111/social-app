@@ -2,11 +2,34 @@
   width: 100%;
   height: 5px;
   border-radius: 100px;
-  overflow: hidden;
   background-color: rgba(0, 0, 0, 0.158);
+  position: relative;
+  &:hover &__check {
+    &::after {
+      opacity: 1;
+    }
+
+    //background-color: black;
+  }
   &__check {
+    &::after {
+      content: "";
+      opacity: 0;
+      background-color: #00acff;
+      width: 14px;
+      height: 14px;
+      position: absolute;
+      border-radius: 100px;
+      z-index: 100;
+      right: -7px;
+      transition: all 0.3s;
+      top: calc(50% - 7px);
+    }
+
     background-color: #00acff;
+    border-radius: 18px;
     height: 100%;
     transition: all 0.3s;
+    position: relative;
   }
 }

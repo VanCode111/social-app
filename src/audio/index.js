@@ -1,12 +1,6 @@
-export const playMusic = async (
-  url,
-  id,
-  title,
-  audio,
-  currentMusic,
-  interval
-) => {
-  let music = { id, title };
+export const playMusic = async (url, id, title, audio, currentMusic, image) => {
+  let music = { id, title, icon: image };
+  console.log("asfas", image);
   if (currentMusic === null) {
     audio.src = url;
     music.play = true;

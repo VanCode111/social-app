@@ -16,14 +16,14 @@ function Music({ audio }) {
   const currentMusic = useSelector((store) => store.currentMusic);
   const [loading, setLoading] = useState(true);
 
-  const handleMusic = async (url, id, title) => {
+  const handleMusic = async (url, id, title, image) => {
     const { music, val } = await playMusic(
       url,
       id,
       title,
       audio,
       currentMusic,
-      interval
+      image
     );
     console.log(interval);
     interval = val;
