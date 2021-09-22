@@ -3,19 +3,22 @@ import "./Music.scss";
 import List from "../List/List";
 import MusicItem from "../MusicItem/MusicItem";
 import "./Music.scss";
+import { useSelector, useDispatch } from "react-redux";
+import { setMusic } from "../../store";
 
 let interval;
 
-function Music() {
+function Music({ audio }) {
+  console.log(audio);
+  const dispatch = useDispatch();
   const [tracks, setTracks] = useState([]);
-  const [currentMusic, setCurrentMusic] = useState(null);
-
-  const disableMusic = async (audio, disable) => {
+  const currentMusic = useSelector((store) => store.currentMusic);
+  console.log(currentMusic);
+  const disableMusic = async (a, disable) => {
     if (interval) {
       clearInterval(interval);
     }
     const au = audio;
-    audio = audio.audio;
     if (!disable) {
       audio.play();
     }
@@ -34,38 +37,35 @@ function Music() {
       }, 50);
     });
     if (disable) {
-      au.play = false;
+      //au.play = false;
       audio.pause();
     } else {
-      au.play = true;
+      //au.play = true;
     }
   };
 
   const playMusic = async (url, id) => {
-    let audio;
+    let music = { id };
     if (currentMusic === null) {
-      audio = { audio: new Audio(url), id };
-      audio.audio.play();
-      audio.play = true;
+      audio.src = url;
+      music.play = true;
+      audio.play();
+      music.duration = audio.duration;
     } else if (currentMusic.id != id) {
-      console.log("safasf");
-      currentMusic.audio.pause();
-      audio = { audio: new Audio(url), id };
-      audio.play = true;
+      audio.currentTime = 0;
+      audio.src = url;
+      music.play = true;
       disableMusic(audio, false);
-      console.log("audio: ", audio);
     } else {
-      audio = { ...currentMusic };
-      console.log(audio);
-      if (audio.play) {
-        audio.play = false;
+      if (currentMusic.play) {
+        music.play = false;
         disableMusic(audio, true);
       } else {
-        audio.play = true;
+        music.play = true;
         disableMusic(audio, false);
       }
     }
-    setCurrentMusic({ ...audio });
+    dispatch(setMusic(music));
   };
   useEffect(() => {
     const getTracks = async () => {
@@ -77,12 +77,13 @@ function Music() {
   }, []);
   return (
     <div className="music">
-      <h2 className="music__title">Музыка</h2>
+      <h2 className="music__title">Музыка </h2>
       <List
         playMusic={playMusic}
         currentMusic={currentMusic}
         component={MusicItem}
         items={tracks}
+        audio={audio}
       />
     </div>
   );

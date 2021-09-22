@@ -2,18 +2,18 @@ import React, { useState, useEffect } from "react";
 import "./MusicItem.scss";
 import ProgressBar from "../../components/ProgressBar/ProgressBar";
 
-function MusicItem({ item, className, playMusic, curr }) {
+function MusicItem({ item, className, playMusic, curr, audio }) {
   const [intervals, setIntervals] = useState(null);
   curr = curr;
+
   const [curTime, setCurTime] = useState(0);
-  let duration = curr ? curr.audio.duration : null;
   useEffect(() => {
     if (intervals) {
       clearInterval(intervals);
     }
     if (curr != null) {
       const interval = setInterval(() => {
-        setCurTime(curr.audio.currentTime);
+        setCurTime(audio.currentTime);
 
         if (!curr.play) {
           clearInterval(interval);
@@ -47,7 +47,7 @@ function MusicItem({ item, className, playMusic, curr }) {
       <ProgressBar
         className={"progress " + (curr ? "visible" : "")}
         current={curTime}
-        end={duration}
+        end={audio.duration}
       />
     </div>
   );

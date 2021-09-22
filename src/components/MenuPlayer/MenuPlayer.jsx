@@ -3,7 +3,6 @@ import "./MenuPlayers.scss";
 import PlayIcon from "../Icons/PlayIcon";
 import PauseIcon from "../Icons/PauseIcon";
 
-let audio = null;
 const audios = [
   {
     url: "https://m.vk.com/mp3/audio_api_unavailable.mp3?extra=encodeextraurl",
@@ -14,13 +13,13 @@ const audios = [
   },
 ];
 
-function MenuPlayer() {
+function MenuPlayer({ audio }) {
   const [play, setPlay] = useState(false);
   const [activeAudio, setActiveAudio] = useState(null);
   const handleAudio = () => {
     if (activeAudio === null) {
       setActiveAudio(0);
-      audio = new Audio(audios[0].url);
+      audio.src = audios[0].url;
     }
 
     if (play == false) {

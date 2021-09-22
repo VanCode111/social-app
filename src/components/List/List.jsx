@@ -3,7 +3,7 @@ import { Component } from "react";
 import MusicItem from "../MusicItem/MusicItem";
 import "./List.scss";
 
-function List({ items, playMusic, currentMusic }) {
+function List({ items, playMusic, currentMusic, audio }) {
   return (
     <div className="list">
       {items.map((item) => {
@@ -14,6 +14,7 @@ function List({ items, playMusic, currentMusic }) {
             playMusic={playMusic}
             className="list__music"
             item={item}
+            audio={audio}
           />
         );
       })}
