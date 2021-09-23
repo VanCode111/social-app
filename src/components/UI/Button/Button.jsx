@@ -4,7 +4,7 @@ import "./Button.scss";
 function Button({ className, onClick, text }) {
   return (
     <button
-      onClick={onClick ? onClick : ""}
+      onClick={onClick ? onClick : null}
       className={"button " + (className ? className : "")}
     >
       {text}

@@ -7,9 +7,10 @@ import { useSelector } from "react-redux";
 import LeftMenu from "../../components/LeftMenu/LeftMenu";
 const audio = new Audio();
 function Home() {
+  const isAuth = useSelector((store) => store);
   return (
     <div className="main">
-      <Header />
+      <Header isAuth={isAuth} />
       <div className="main__content">
         <div className="container">
           <div className="main__content-inner">

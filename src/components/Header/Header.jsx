@@ -38,8 +38,7 @@ const IconTabs = [
   },
 ];
 
-function Header() {
-  const isAuth = false;
+function Header({ isAuth }) {
   return (
     <header className="header">
       <div className="container">

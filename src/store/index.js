@@ -5,6 +5,7 @@ const counterSlice = createSlice({
   initialState: {
     currentMusic: null,
     tracks: [],
+    isAuth: false,
   },
   reducers: {
     setMusic: (state, action) => {
@@ -13,10 +14,13 @@ const counterSlice = createSlice({
     setTracks: (state, action) => {
       state.tracks = action.payload;
     },
+    setAuth: (state, action) => {
+      state.isAuth = action.payload;
+    },
   },
 });
 
-export const { setMusic, setTracks } = counterSlice.actions;
+export const { setMusic, setTracks, setAuth } = counterSlice.actions;
 
 export default configureStore({
   reducer: counterSlice.reducer,
