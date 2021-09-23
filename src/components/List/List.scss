@@ -1,5 +1,16 @@
 .list {
   &__music {
     margin-bottom: 8px;
+    position: relative;
+    &::after {
+      content: "";
+      display: block;
+      bottom: 0;
+      width: calc(100% - 20px);
+      position: absolute;
+      left: 10px;
+      height: 1px;
+      background-color: rgba(0, 0, 0, 0.075);
+    }
   }
 }

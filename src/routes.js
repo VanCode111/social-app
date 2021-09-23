@@ -1,18 +1,18 @@
 import Feeds from "./components/Feeds/Feeds";
 import Profile from "./components/Profile/Profile";
-import { Auth, Main } from "./pages";
+import { Main } from "./pages";
 import Comunity from "./pages/Comunity";
+import Auth from "./pages/Auth/Auth";
 import Music from "./components/Music/Music";
 
 export const routes = [
   {
-    path: "/registration",
+    path: "/",
     component: Auth,
   },
-  {
-    path: "/login",
-    component: Auth,
-  },
+];
+
+export const authRoutes = [
   {
     path: "/comunity",
     component: Comunity,

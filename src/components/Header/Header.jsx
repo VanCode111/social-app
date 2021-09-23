@@ -39,16 +39,17 @@ const IconTabs = [
 ];
 
 function Header() {
+  const isAuth = false;
   return (
     <header className="header">
       <div className="container">
-        <div className="header__inner">
+        <div className={"header__inner " + (!isAuth ? "no-auth" : "")}>
           <a href="#" className="header__logo">
             <img src={mainLogo} alt="logo" className="header__logo-img" />
           </a>
-          <MenuTabs IconTabs={IconTabs} className="header__menu" />
+          {isAuth && <MenuTabs IconTabs={IconTabs} className="header__menu" />}
 
-          <div className="header__search-box">
+          <div className={"header__search-box " + (!isAuth ? "no-auth" : "")}>
             <SearchBar placeholder="Поиск" />
           </div>
         </div>
