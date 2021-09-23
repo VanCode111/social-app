@@ -4,16 +4,17 @@ import { Route, Switch, Redirect } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 function Routes() {
-  const isAuth = useSelector((store) => store.isAuth);
-  console.log(isAuth);
+  const isAuth = useSelector(({ auth }) => auth.isAuth);
   const renderRoutes = (routes) => {
-    routes = routes.map(({ path, component }) => {
-      return <Route exact="true" path={path} component={component} />;
+    routes = routes.map(({ path, component }, index) => {
+      return (
+        <Route key={index} exact={true} path={path} component={component} />
+      );
     });
     return routes;
   };
   return (
-    <div class="routes">
+    <div className="routes">
       <Switch>
         {!isAuth && renderRoutes(routes)}
         {isAuth && renderRoutes(authRoutes)}

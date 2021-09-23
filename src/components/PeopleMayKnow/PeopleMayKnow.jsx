@@ -24,8 +24,8 @@ function PeopleMayKnow() {
   return (
     <div className="mayknow">
       <p className="mayknow__title">Возможные друзья</p>
-      {people.map(({ name }) => {
-        return <UserRow className="mayknow__user" name={name} />;
+      {people.map(({ name }, index) => {
+        return <UserRow key={index} className="mayknow__user" name={name} />;
       })}
     </div>
   );

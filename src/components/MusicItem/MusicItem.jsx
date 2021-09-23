@@ -4,7 +4,6 @@ import ProgressBar from "../../components/ProgressBar/ProgressBar";
 
 function MusicItem({ item, className, playMusic, curr, audio }) {
   const [intervals, setIntervals] = useState(null);
-  curr = curr;
 
   const [curTime, setCurTime] = useState(0);
   useEffect(() => {

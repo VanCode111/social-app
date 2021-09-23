@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./Music.scss";
-import List from "../List/List";
-import MusicItem from "../MusicItem/MusicItem";
-import "./Music.scss";
 import { useSelector, useDispatch } from "react-redux";
 import { setMusic, setTracks } from "../../store";
-import Loader from "../../components/Loader/Loader";
 import { playMusic } from "../../audio";
 import Tabs from "../Tabs/Tabs";
 import OwnMusic from "../OwnMusic/OwnMusic";
@@ -15,7 +11,7 @@ let interval;
 function Music({ audio }) {
   const dispatch = useDispatch();
   const [tracks, setTrack] = useState([]);
-  const currentMusic = useSelector((store) => store.currentMusic);
+  const currentMusic = useSelector(({ tracks }) => tracks.currentMusic);
   const [loading, setLoading] = useState(true);
 
   const handleMusic = async (url, id, title, image) => {
@@ -27,7 +23,6 @@ function Music({ audio }) {
       currentMusic,
       image
     );
-    console.log(interval);
     interval = val;
     dispatch(setMusic(music));
   };

@@ -1,27 +1,16 @@
-import { createSlice, configureStore } from "@reduxjs/toolkit";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import tracks from "./tracksSlice";
+import auth from "./authSlice";
+import { setAuth } from "./authSlice";
+import { setMusic, setTracks } from "./tracksSlice";
 
-const counterSlice = createSlice({
-  name: "counter",
-  initialState: {
-    currentMusic: null,
-    tracks: [],
-    isAuth: false,
-  },
-  reducers: {
-    setMusic: (state, action) => {
-      state.currentMusic = action.payload;
-    },
-    setTracks: (state, action) => {
-      state.tracks = action.payload;
-    },
-    setAuth: (state, action) => {
-      state.isAuth = action.payload;
-    },
-  },
+const rootReducer = combineReducers({
+  tracks: tracks,
+  auth: auth,
 });
-
-export const { setMusic, setTracks, setAuth } = counterSlice.actions;
 
 export default configureStore({
-  reducer: counterSlice.reducer,
+  reducer: rootReducer,
 });
+
+export { setAuth, setMusic, setTracks };

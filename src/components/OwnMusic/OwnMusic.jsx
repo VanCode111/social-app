@@ -8,7 +8,7 @@ import Loader from "../../components/Loader/Loader";
 function OwnMusic({ handleMusic, audio }) {
   const dispatch = useDispatch();
   const [tracks, setTrack] = useState([]);
-  const currentMusic = useSelector((store) => store.currentMusic);
+  const currentMusic = useSelector(({ tracks }) => tracks.currentMusic);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     const getTracks = async () => {

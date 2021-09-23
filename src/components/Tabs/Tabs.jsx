@@ -11,6 +11,7 @@ function Tabs({ children, tabs }) {
         {tabs.map(({ name, id }) => {
           return (
             <a
+              key={id}
               className={"tabs__tab " + (activeTab === id ? "active" : "")}
               onClick={() => setActiveTab(id)}
             >

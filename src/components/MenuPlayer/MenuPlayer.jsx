@@ -9,8 +9,7 @@ import { playMusic, changeTrack } from "../../audio";
 
 function MenuPlayer({ audio, currentMusic }) {
   const dispatch = useDispatch();
-  const tracks = useSelector((state) => state.tracks);
-  const [activeAudio, setActiveAudio] = useState(null);
+  const tracks = useSelector(({ tracks }) => tracks.tracks);
   const handleAudio = async () => {
     const { music } = await playMusic(
       currentMusic.url,
@@ -26,11 +25,10 @@ function MenuPlayer({ audio, currentMusic }) {
     audio.addEventListener("ended", () => {
       handleChangeTrack("right");
     });
-  }, []);
+  }, [audio]);
 
   const handleChangeTrack = async (direction) => {
     const { music } = await changeTrack(direction, audio, tracks, currentMusic);
-    console.log(music);
     dispatch(setMusic(music));
   };
   return (
