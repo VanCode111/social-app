@@ -2,6 +2,7 @@ import React from "react";
 import "./Header.scss";
 import mainLogo from "../../assets/img/logo.svg";
 import { SearchBar, MenuTabs } from "../index";
+import SearchHelper from "../SearchHelper/SearchHelper";
 import {
   HomeIcon,
   ComunityIcon,
@@ -49,7 +50,7 @@ function Header({ isAuth, user }) {
           {isAuth && <MenuTabs IconTabs={IconTabs} className="header__menu" />}
 
           <div className={"header__search-box " + (!isAuth ? "no-auth" : "")}>
-            <SearchBar placeholder="Поиск" />
+            <SearchHelper />
           </div>
         </div>
       </div>

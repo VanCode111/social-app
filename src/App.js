@@ -12,11 +12,11 @@ function App() {
     try {
       const res = await check();
       dispatch(setAuth(true));
-      dispatch(setUser({ link: res.link }));
-      setLoadig(false);
+      dispatch(setUser({ link: "/" + res.link }));
     } catch (e) {
       console.log(e);
     }
+    setLoadig(false);
   }, []);
   if (loading) {
     return "";

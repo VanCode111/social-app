@@ -6,6 +6,7 @@ import "./MenuTabs.scss";
 function MenuTabs({ IconTabs, className }) {
   const location = useLocation();
   const pathName = location.pathname;
+  console.log(pathName);
   const [activeTab, setActiveTab] = useState(0);
   return (
     <ul className={"menu-tabs " + className}>
@@ -18,7 +19,6 @@ function MenuTabs({ IconTabs, className }) {
                 state: state || null,
               }}
               onClick={() => setActiveTab(index)}
-              href="#"
               className={
                 "menu-tabs__tab-link " + (pathName === path ? "active" : "")
               }
