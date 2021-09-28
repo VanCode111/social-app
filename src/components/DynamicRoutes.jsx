@@ -6,6 +6,7 @@ import { Main } from "../pages";
 
 function DynamicRoutes() {
   const location = useLocation();
+  console.log(location);
   const pathName = location.pathname;
   const link = pathName.slice(1);
   const [email, setEmail] = useState("");
@@ -20,7 +21,7 @@ function DynamicRoutes() {
   }, []);
   return (
     <div className="dynamic-route">
-      {email && <Main>{email}</Main>}
+      {(location.state || email) && <Main>{email}</Main>}
       {!founded && <NotFoundPage />}
     </div>
   );

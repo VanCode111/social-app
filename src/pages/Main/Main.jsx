@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 import LeftMenu from "../../components/LeftMenu/LeftMenu";
 const audio = new Audio();
 function Home({ children }) {
-  const isAuth = useSelector(({ auth }) => auth.isAuth);
+  const { isAuth, user } = useSelector(({ auth }) => auth);
   return (
     <div className="main">
       <Header isAuth={isAuth} />
@@ -15,7 +15,7 @@ function Home({ children }) {
         <div className="container">
           <div className="main__content-inner">
             <div className="main__left-menu">
-              <LeftMenu audio={audio} />
+              <LeftMenu user={user} audio={audio} />
             </div>
             {children}
             {mainRoutes.map(({ path, component }, index) => {

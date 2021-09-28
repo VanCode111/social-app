@@ -5,7 +5,7 @@ import Input from "../../components/UI/Input/Input";
 import { Header } from "../../components";
 import Button from "../../components/UI/Button/Button";
 import { useDispatch } from "react-redux";
-import { setAuth } from "../../store";
+import { setAuth, setUser } from "../../store";
 
 function Auth() {
   const [email, setEmail] = useState("");
@@ -21,6 +21,7 @@ function Auth() {
         res = await registration({ email, password });
       }
       dispatch(setAuth(true));
+      dispatch(setUser({ link: "/" + res.router.path }));
       console.log(res);
     } catch (e) {
       console.log(e);
