@@ -10,7 +10,11 @@ function Profile({ user }) {
         mainPage={
           <div className="profile__info">
             <p className="profile__name">
-              {!user ? <Loader className="profile__loader-name" /> : user.email}
+              {!user ? (
+                <Loader className="profile__loader-name" />
+              ) : (
+                `${user.name} ${user.lastName}`
+              )}
             </p>
           </div>
         }

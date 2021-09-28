@@ -20,7 +20,7 @@ function Auth() {
       if (isLogin) {
         res = await login({ email, password });
       } else {
-        res = await registration({ email, password });
+        res = await registration({ email, password, name, lastName });
       }
       dispatch(setAuth(true));
       dispatch(setUser({ link: "/" + res.router.path }));

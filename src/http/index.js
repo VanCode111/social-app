@@ -2,7 +2,7 @@ import axios from "axios";
 
 const $host = axios.create({ baseURL: "http://localhost:5000/api/" });
 
-const $authHost = axios.create({ baseURL: process.env.REACT_API_URL });
+const $authHost = axios.create({ baseURL: "http://localhost:5000/api/" });
 
 const authIterceptor = (config) => {
   config.headers.authorization = `Bearer ${localStorage.getItem("token")}`;
