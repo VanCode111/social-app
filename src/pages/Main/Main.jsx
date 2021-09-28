@@ -1,12 +1,12 @@
 import React from "react";
 import "./Main.scss";
-import { Header, PostCard, Feeds, MenuPlayer } from "../../components";
+import { Header } from "../../components";
 import { Route } from "react-router-dom";
 import { mainRoutes } from "../../routes";
 import { useSelector } from "react-redux";
 import LeftMenu from "../../components/LeftMenu/LeftMenu";
 const audio = new Audio();
-function Home() {
+function Home({ children }) {
   const isAuth = useSelector(({ auth }) => auth.isAuth);
   return (
     <div className="main">
@@ -17,6 +17,7 @@ function Home() {
             <div className="main__left-menu">
               <LeftMenu audio={audio} />
             </div>
+            {children}
             {mainRoutes.map(({ path, component }, index) => {
               return (
                 <Route

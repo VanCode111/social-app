@@ -10,8 +10,19 @@
     background-color: #fff;
     border-radius: 18px;
   }
-
+  &__link {
+    color: #00acff;
+    font-size: 18px;
+    text-decoration: none;
+  }
+  &__bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 18px;
+  }
   &__button {
     width: 100%;
+    margin-bottom: 15px;
   }
 }

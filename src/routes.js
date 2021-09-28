@@ -1,5 +1,4 @@
 import Feeds from "./components/Feeds/Feeds";
-import Profile from "./components/Profile/Profile";
 import { Main } from "./pages";
 import Comunity from "./pages/Comunity";
 import Auth from "./pages/Auth/Auth";
