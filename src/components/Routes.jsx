@@ -37,6 +37,7 @@ function Routes() {
       <Switch>
         {!isAuth && renderRoutes(routes)}
         {isAuth && renderRoutes(authRoutes)}
+
         {redirect ? (
           redirect
         ) : (

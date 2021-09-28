@@ -11,34 +11,34 @@ import {
   PersonIcon,
 } from "../Icons";
 
-const IconTabs = [
-  {
-    path: "/feeds",
-    icon: <HomeIcon width="28" height="28" />,
-  },
-  {
-    path: "/comunity",
-    icon: <ComunityIcon width="28" height="28" />,
-  },
-  {
-    path: "/comunitys",
-    icon: <BusyIcon width="28" height="28" />,
-  },
-  {
-    path: "/comunitys",
-    icon: <BellIcon width="28" height="28" />,
-  },
-  {
-    path: "/comunitys",
-    icon: <MessageIcon width="28" height="28" />,
-  },
-  {
-    path: "/profile",
-    icon: <PersonIcon width="28" height="28" />,
-  },
-];
-
-function Header({ isAuth }) {
+function Header({ isAuth, user }) {
+  const IconTabs = [
+    {
+      path: "/feeds",
+      icon: <HomeIcon width="28" height="28" />,
+    },
+    {
+      path: "/profile",
+      icon: <ComunityIcon width="28" height="28" />,
+    },
+    {
+      path: "/comunitys",
+      icon: <BusyIcon width="28" height="28" />,
+    },
+    {
+      path: "/comunitys",
+      icon: <BellIcon width="28" height="28" />,
+    },
+    {
+      path: "/comunitys",
+      icon: <MessageIcon width="28" height="28" />,
+    },
+    {
+      path: user && user.link,
+      state: { type: "user" },
+      icon: <PersonIcon width="28" height="28" />,
+    },
+  ];
   return (
     <header className="header">
       <div className="container">

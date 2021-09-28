@@ -9,11 +9,14 @@ function MenuTabs({ IconTabs, className }) {
   const [activeTab, setActiveTab] = useState(0);
   return (
     <ul className={"menu-tabs " + className}>
-      {IconTabs.map(({ icon, path }, index) => {
+      {IconTabs.map(({ icon, path, state }, index) => {
         return (
           <li className="menu-tabs__tab" key={index}>
             <Link
-              to={path}
+              to={{
+                pathname: path,
+                state: state || null,
+              }}
               onClick={() => setActiveTab(index)}
               href="#"
               className={

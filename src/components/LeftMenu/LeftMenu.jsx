@@ -6,9 +6,6 @@ function LeftMenu({ audio, user }) {
   const currentMusic = useSelector(({ tracks }) => tracks.currentMusic);
   return (
     <div className="left-menu">
-      <Link to={{ pathname: user.link, state: { type: "user" } }}>
-        Моя страница
-      </Link>
       {currentMusic && <MenuPlayer currentMusic={currentMusic} audio={audio} />}
     </div>
   );

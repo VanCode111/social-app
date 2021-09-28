@@ -10,7 +10,7 @@ function Home({ children }) {
   const { isAuth, user } = useSelector(({ auth }) => auth);
   return (
     <div className="main">
-      <Header isAuth={isAuth} />
+      <Header isAuth={isAuth} user={user} />
       <div className="main__content">
         <div className="container">
           <div className="main__content-inner">
