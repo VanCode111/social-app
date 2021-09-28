@@ -1,6 +1,7 @@
 import React from "react";
 import "./Profile.scss";
 import Template from "../../components/Template/Template";
+import Loader from "../../components/Loader/Loader";
 
 function Profile({ user }) {
   return (
@@ -8,7 +9,9 @@ function Profile({ user }) {
       <Template
         mainPage={
           <div className="profile__info">
-            <p className="profile__name">{user && user.email}</p>
+            <p className="profile__name">
+              {!user ? <Loader className="profile__loader-name" /> : user.email}
+            </p>
           </div>
         }
       />

@@ -11,6 +11,8 @@ function Auth() {
   const [email, setEmail] = useState("");
   const [isLogin, setIsLogin] = useState(true);
   const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
+  const [lastName, setLastName] = useState("");
   const dispatch = useDispatch();
   const authHandle = async () => {
     try {
@@ -38,30 +40,77 @@ function Auth() {
     <div className="auth">
       <Header />
       <div className="auth__page">
-        <div className="auth__form-card">
-          <form action="" className="auth__form">
-            <Input
-              onChange={(e) => setEmail(e.target.value)}
-              value={email}
-              placeholder="Логин"
+        {isLogin ? (
+          <div className="auth__form-card">
+            <p className="auth__form-title">Авторизация</p>
+            <form action="" className="auth__form">
+              <Input
+                onChange={(e) => setEmail(e.target.value)}
+                value={email}
+                placeholder="Логин"
+              />
+              <Input
+                onChange={(e) => setPassword(e.target.value)}
+                value={password}
+                type="password"
+                placeholder="Пароль"
+              />
+            </form>
+            <Button
+              onClick={authHandle}
+              className="auth__button"
+              text="Войти"
             />
-            <Input
-              onChange={(e) => setPassword(e.target.value)}
-              value={password}
-              type="password"
-              placeholder="Пароль"
-            />
-          </form>
-          <Button onClick={authHandle} className="auth__button" text="Войти" />
-          <div className="auth__bottom">
-            <p className="auth__desc">
-              {isLogin ? "Нет аккаунта?" : "Есть аккаунт?"}
-            </p>
-            <a href="#" onClick={changeAuthPage} className="auth__link">
-              {isLogin ? "Зарегистрироваться" : "Войти"}
-            </a>
+            <div className="auth__bottom">
+              <p className="auth__desc">
+                {isLogin ? "Нет аккаунта?" : "Есть аккаунт?"}
+              </p>
+              <a href="#" onClick={changeAuthPage} className="auth__link">
+                {isLogin ? "Зарегистрироваться" : "Войти"}
+              </a>
+            </div>
           </div>
-        </div>
+        ) : (
+          <div className="auth__form-card">
+            <p className="auth__form-title">Регистрация</p>
+            <form action="" className="auth__form">
+              <Input
+                onChange={(e) => setEmail(e.target.value)}
+                value={email}
+                placeholder="Логин"
+              />
+              <Input
+                onChange={(e) => setLastName(e.target.value)}
+                value={lastName}
+                placeholder="Фамилия"
+              />
+              <Input
+                onChange={(e) => setName(e.target.value)}
+                value={name}
+                placeholder="Имя"
+              />
+              <Input
+                onChange={(e) => setPassword(e.target.value)}
+                value={password}
+                type="password"
+                placeholder="Пароль"
+              />
+            </form>
+            <Button
+              onClick={authHandle}
+              className="auth__button"
+              text="Войти"
+            />
+            <div className="auth__bottom">
+              <p className="auth__desc">
+                {isLogin ? "Нет аккаунта?" : "Есть аккаунт?"}
+              </p>
+              <a href="#" onClick={changeAuthPage} className="auth__link">
+                {isLogin ? "Зарегистрироваться" : "Войти"}
+              </a>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

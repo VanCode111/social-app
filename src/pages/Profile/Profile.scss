@@ -10,4 +10,12 @@
     padding-bottom: 10px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.103);
   }
+  &__loader-name {
+    height: 100%;
+    width: 100px;
+  }
+  &__name {
+    line-height: 30px;
+    height: 40px;
+  }
 }
