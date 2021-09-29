@@ -6,6 +6,7 @@ const counterSlice = createSlice({
     isAuth: false,
     user: {
       link: "",
+      profile: null,
     },
   },
   reducers: {
@@ -13,11 +14,14 @@ const counterSlice = createSlice({
       state.isAuth = action.payload;
     },
     setUser: (state, action) => {
-      state.user.link = action.payload.link;
+      state.user = action.payload;
+    },
+    setImage: (state, action) => {
+      state.user.profile.profileImage = action.payload;
     },
   },
 });
 
-export const { setAuth, setUser } = counterSlice.actions;
+export const { setAuth, setUser, setImage } = counterSlice.actions;
 
 export default counterSlice.reducer;

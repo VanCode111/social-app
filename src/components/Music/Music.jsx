@@ -28,6 +28,7 @@ function Music({ audio }) {
   };
 
   useEffect(() => {
+    document.title = "Музыка";
     const getTracks = async () => {
       const response = await fetch("http://localhost:3000/tracks");
       const res = await response.json();

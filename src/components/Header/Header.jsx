@@ -36,7 +36,7 @@ function Header({ isAuth, user }) {
     },
     {
       path: user && user.link,
-      state: { type: "user" },
+      state: { type: "user", profile: user?.profile },
       icon: <PersonIcon width="28" height="28" />,
     },
   ];

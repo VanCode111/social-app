@@ -23,7 +23,7 @@ function Auth() {
         res = await registration({ email, password, name, lastName });
       }
       dispatch(setAuth(true));
-      dispatch(setUser({ link: "/" + res.router.path }));
+      dispatch(setUser({ profile: res.profile, link: "/" + res.router.path }));
       console.log(res);
     } catch (e) {
       console.log(e);

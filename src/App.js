@@ -5,6 +5,7 @@ import { Routes } from "./components";
 import { setAuth, setUser } from "./store";
 import { check } from "./http/userAPI";
 import "./store";
+import LoadScreen from "./components/LoadScreen/LoadScreen";
 function App() {
   const dispatch = useDispatch();
   const [loading, setLoadig] = useState(true);

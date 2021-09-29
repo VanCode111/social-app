@@ -4,7 +4,7 @@ import TextareaAutosize from "react-textarea-autosize";
 import { MessageIcon } from "../Icons";
 import PersonIcon from "../../assets/img/PersonIcon.png";
 
-function PostCard({ className, addPost }) {
+function PostCard({ className, addPost, onClick }) {
   const [text, setText] = useState("");
 
   const changeText = (event) => {
@@ -15,6 +15,17 @@ function PostCard({ className, addPost }) {
   const addPostHandler = () => {
     addPost({ text });
     setText("");
+  };
+
+  const createPost = () => {
+    if (!onClick) {
+      return;
+    }
+    const post = {
+      text,
+    };
+
+    onClick(post);
   };
   return (
     <div className={"post-card " + className}>
@@ -45,7 +56,7 @@ function PostCard({ className, addPost }) {
             <button className="post-card__item-btn">Статья</button>
           </li>
         </ul>
-        <button onClick={addPostHandler} className="post-card__btn">
+        <button onClick={createPost} className="post-card__btn">
           <MessageIcon />
         </button>
       </div>

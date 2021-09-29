@@ -35,7 +35,8 @@ function SearchHelper() {
                 <UserRow
                   className="search-helper__item"
                   path={obj.link}
-                  name={`${obj.name} ${obj.lastName}`}
+                  profile={obj.profile}
+                  name={`${obj.profile.name} ${obj.profile.lastName}`}
                 />
               );
             })}

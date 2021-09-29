@@ -5,4 +5,19 @@ const uploadImage = async (img) => {
   return data;
 };
 
-export { uploadImage };
+const createPost = async ({ userId, text }) => {
+  const { data } = await $host.post("/createpost", {
+    userId,
+    text,
+  });
+  return data;
+};
+
+const getProfilePosts = async ({ userId }) => {
+  const { data } = await $host.post("/getuserposts", {
+    userId,
+  });
+  return data;
+};
+
+export { uploadImage, createPost, getProfilePosts };

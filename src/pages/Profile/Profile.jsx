@@ -1,16 +1,30 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Profile.scss";
 import Template from "../../components/Template/Template";
 import Loader from "../../components/Loader/Loader";
 import Button from "../../components/UI/Button/Button";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { uploadImage } from "../../http/ProfileAPI";
-import { Post, PostCard } from "../../components";
+import { getProfilePosts } from "../../http/ProfileAPI";
+
+import PostCreator from "../../components/PostCreator/PostCreator";
+import { setImage } from "../../store/authSlice";
 
 function Profile({ user, link }) {
   const [file, setFile] = useState(null);
+  const dispatch = useDispatch();
+  const [posts, setPosts] = useState([]);
   const userAuth = useSelector((store) => store.auth);
   const ownPage = link ? userAuth.user.link === "/" + link : false;
+  console.log(user);
+  const getPosts = async (userId) => {
+    try {
+      const posts = await getProfilePosts({ userId });
+      setPosts(posts);
+    } catch (e) {
+      console.log(e);
+    }
+  };
   const selectFile = async (e) => {
     console.log(e.target.files);
     const img = e.target.files[0];
@@ -19,16 +33,25 @@ function Profile({ user, link }) {
     }
     const formData = new FormData();
     formData.append("img", img);
-    console.log("asfasf", user.user);
+    console.log("asafsaga", user);
     formData.append("userId", user.user);
     try {
       const res = await uploadImage(formData);
+
+      console.log("asfasf", res);
       setFile(res);
+      dispatch(setImage(res));
       console.log(res);
     } catch (e) {
       console.log(e);
     }
   };
+  useEffect(() => {
+    if (user) {
+      getPosts(user.user);
+      document.title = user.name + " " + user.lastName;
+    }
+  }, [user]);
   console.log(user);
   return (
     <div className="profile">
@@ -39,7 +62,7 @@ function Profile({ user, link }) {
               className="profile__avatar-wrapper"
               style={{
                 backgroundImage: `url(${
-                  user ? user.profileImage : "http://localhost:5000/Avatar.jpg"
+                  file ? file : user ? user.profileImage : ""
                 })`,
               }}
             >
@@ -67,7 +90,14 @@ function Profile({ user, link }) {
                 )}
               </p>
             </div>
-            {ownPage && <PostCard className="profile__post-card" />}
+            {
+              <PostCreator
+                postCreator={ownPage}
+                userId={user ? user.user : null}
+                posts={posts}
+                className="profile__post-card"
+              />
+            }
           </div>
         }
       />
