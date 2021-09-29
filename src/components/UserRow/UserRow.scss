@@ -5,7 +5,10 @@
   text-decoration: none;
   color: black;
   border-radius: 18px;
-
+  &__img {
+    width: 40px;
+    border-radius: 100px;
+  }
   &__left {
     display: flex;
     align-items: center;

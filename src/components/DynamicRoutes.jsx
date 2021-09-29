@@ -7,6 +7,10 @@ import Profile from "../pages/Profile/Profile";
 import LoadScreen from "./LoadScreen/LoadScreen";
 
 function DynamicRoutes() {
+  const override = {
+    display: "block",
+    margin: "0 auto",
+  };
   const location = useLocation();
   console.log(location.state);
   const pathName = location.pathname;

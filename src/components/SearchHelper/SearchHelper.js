@@ -36,6 +36,7 @@ function SearchHelper() {
                   className="search-helper__item"
                   path={obj.link}
                   profile={obj.profile}
+                  img={obj.profile.profileImage}
                   name={`${obj.profile.name} ${obj.profile.lastName}`}
                 />
               );

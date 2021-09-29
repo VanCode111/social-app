@@ -5,6 +5,7 @@ import Loader from "../../components/Loader/Loader";
 import Button from "../../components/UI/Button/Button";
 import { useSelector, useDispatch } from "react-redux";
 import { uploadImage } from "../../http/ProfileAPI";
+import SyncLoader from "react-spinners/MoonLoader";
 import { getProfilePosts } from "../../http/ProfileAPI";
 
 import PostCreator from "../../components/PostCreator/PostCreator";
@@ -16,11 +17,14 @@ function Profile({ user, link }) {
   const [posts, setPosts] = useState([]);
   const userAuth = useSelector((store) => store.auth);
   const ownPage = link ? userAuth.user.link === "/" + link : false;
+  const [loading, setLoadig] = useState(false);
   console.log(user);
   const getPosts = async (userId) => {
+    setLoadig(true);
     try {
       const posts = await getProfilePosts({ userId });
       setPosts(posts);
+      setLoadig(false);
     } catch (e) {
       console.log(e);
     }
@@ -47,6 +51,9 @@ function Profile({ user, link }) {
     }
   };
   useEffect(() => {
+    if (file) {
+      setFile(null);
+    }
     if (user) {
       getPosts(user.user);
       document.title = user.name + " " + user.lastName;
@@ -93,6 +100,10 @@ function Profile({ user, link }) {
             {
               <PostCreator
                 postCreator={ownPage}
+                loading={loading}
+                loadingSpinner={
+                  <SyncLoader color="#00acff" loading={loading} size={50} />
+                }
                 userId={user ? user.user : null}
                 posts={posts}
                 className="profile__post-card"
