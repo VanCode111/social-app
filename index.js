@@ -5,8 +5,12 @@ const cookieParser = require("cookie-parser");
 const mongoose = require("mongoose");
 const app = express();
 const router = require("./router/index");
+const expressUpload = require("express-fileupload");
+const path = require("path");
 const PORT = process.env.PORT || 5000;
 
+app.use(expressUpload());
+app.use(express.static(path.resolve(__dirname, "static")));
 app.use(express.json());
 app.use(cors());
 app.use(cookieParser());
@@ -19,7 +23,7 @@ const start = async () => {
       useUnifiedTopology: true,
     });
     app.listen(PORT, () => {
-      console.log("server has been started");
+      console.log("server has been started " + PORT);
     });
   } catch (e) {
     console.log(e);
