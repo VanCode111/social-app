@@ -46,6 +46,9 @@
   &__avatar-wrapper:hover &__avatar-popup {
     transform: translate(0, 0);
   }
+  &__post-card {
+    margin-top: 15px;
+  }
   &__avatar-popup {
     position: absolute;
     bottom: 0;

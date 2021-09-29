@@ -5,6 +5,7 @@ import Loader from "../../components/Loader/Loader";
 import Button from "../../components/UI/Button/Button";
 import { useSelector } from "react-redux";
 import { uploadImage } from "../../http/ProfileAPI";
+import { Post, PostCard } from "../../components";
 
 function Profile({ user, link }) {
   const [file, setFile] = useState(null);
@@ -56,14 +57,17 @@ function Profile({ user, link }) {
           </div>
         }
         mainPage={
-          <div className="profile__info">
-            <p className="profile__name">
-              {!user ? (
-                <Loader className="profile__loader-name" />
-              ) : (
-                `${user.name} ${user.lastName}`
-              )}
-            </p>
+          <div className="profile__main">
+            <div className="profile__info">
+              <p className="profile__name">
+                {!user ? (
+                  <Loader className="profile__loader-name" />
+                ) : (
+                  `${user.name} ${user.lastName}`
+                )}
+              </p>
+            </div>
+            {ownPage && <PostCard className="profile__post-card" />}
           </div>
         }
       />
