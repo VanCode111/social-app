@@ -18,4 +18,42 @@
     line-height: 30px;
     height: 40px;
   }
+  &__person-card {
+    padding: 15px;
+    background-color: #fff;
+
+    border-radius: 18px;
+  }
+  &__sub {
+    width: 100%;
+    margin-top: 15px;
+  }
+  &__avatar {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+  }
+  &__avatar-wrapper {
+    position: relative;
+    overflow: hidden;
+    width: 260;
+    height: 260px;
+    background: center no-repeat;
+    background-size: cover;
+    background-image: url("http://localhost:5000/9ce98493-822e-4c98-89cf-ca2e58f43f8f.jpg");
+    border-radius: 10px;
+  }
+  &__avatar-wrapper:hover &__avatar-popup {
+    transform: translate(0, 0);
+  }
+  &__avatar-popup {
+    position: absolute;
+    bottom: 0;
+    transform: translate(0, 100%);
+    transition: all 0.3s;
+    left: 0px;
+    background-color: rgba(0, 0, 0, 0.541);
+    width: 100%;
+    height: 50%;
+  }
 }

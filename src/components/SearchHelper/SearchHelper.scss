@@ -21,4 +21,7 @@
       background-color: rgba(0, 0, 0, 0.034);
     }
   }
+  &__item + &__item {
+    margin-top: 15px;
+  }
 }

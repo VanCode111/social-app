@@ -2,18 +2,23 @@ import React, { useState } from "react";
 import { findObjects } from "../../http/objectsAPI";
 import { SearchBar } from "..";
 import UserRow from "../UserRow/UserRow";
-import { Link } from "react-router-dom";
 import "./SearchHelper.scss";
 function SearchHelper() {
   const [objects, setObjects] = useState([]);
-  const findHandle = async (e) => {
+  const typing = (e) => {
+    setTimeout(() => {
+      findHandle(e.target.value);
+    }, 500);
+  };
+  const findHandle = async (str) => {
     try {
-      if (e.target.value.trim() === "") {
+      if (str.trim() === "") {
         setObjects([]);
         return;
       }
-      const objects = await findObjects({ subString: e.target.value });
-      console.log(objects);
+
+      const promise = findObjects({ subString: str });
+      const objects = await promise;
       setObjects(objects);
     } catch (e) {
       console.log(e);
@@ -21,14 +26,17 @@ function SearchHelper() {
   };
   return (
     <div className="search-helper">
-      <SearchBar onChange={findHandle} placeholder="Поиск" />
+      <SearchBar onChange={typing} placeholder="Поиск" />
       {objects.length > 0 && (
         <div className="search-helper__box">
           {objects &&
             objects.map((obj) => {
-              console.log(obj);
               return (
-                <UserRow path={obj.link} name={`${obj.name} ${obj.lastName}`} />
+                <UserRow
+                  className="search-helper__item"
+                  path={obj.link}
+                  name={`${obj.name} ${obj.lastName}`}
+                />
               );
             })}
         </div>
