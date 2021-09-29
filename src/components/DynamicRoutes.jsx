@@ -23,7 +23,9 @@ function DynamicRoutes() {
   }, [location]);
   return (
     <div className="dynamic-route">
-      {(location.state || user) && <Main>{<Profile user={user} />}</Main>}
+      {(location.state || user) && (
+        <Main>{<Profile user={user} link={link} />}</Main>
+      )}
       {!founded && <NotFoundPage />}
     </div>
   );

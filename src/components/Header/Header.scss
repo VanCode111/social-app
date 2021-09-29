@@ -1,5 +1,6 @@
 @import "../../style/variables";
 .header {
+  z-index: 100;
   background-color: $white;
   position: fixed;
   width: 100%;
