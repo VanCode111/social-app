@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import "./Post.scss";
+import { MdDelete } from "react-icons/md";
 import ButtonIcon from "../UI/ButtonIcon/ButtonIcon";
 import { BellIcon } from "../Icons";
 import UserRow from "../UserRow/UserRow";
 import PropTypes from "prop-types";
+import IconText from "../UI/IconText/IconText";
 import CellButton from "../UI/CellButton/CellButton";
 import DropDown from "../UI/DropDown/DropDown";
 import { useHistory } from "react-router-dom";
@@ -39,7 +41,10 @@ function Post({ className, profile, authorLink, text }) {
           }
         >
           <CellButton>
-            <p>Иван Елисеев</p>
+            <IconText
+              icon={<MdDelete color="gray" size="1.5em" />}
+              text="Удалить"
+            />
           </CellButton>
         </DropDown>
       </div>
