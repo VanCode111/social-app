@@ -2,20 +2,29 @@ import React from "react";
 import "./UserRow.scss";
 import PersonIcon from "../../assets/img/PersonIcon.png";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
-function UserRow({ name, className, path, profile, img }) {
+function UserRow({ name, className, path, profile, img, clickHandler }) {
   return (
-    <Link
-      to={{ pathname: path ? path : "", state: { type: "user", profile } }}
-      className={"user-row " + (className ? className : "")}
-    >
-      <div href="" className="user-row__left">
-        <img src={img ? img : ""} alt="" className="user-row__img" />
-        <p className="user-row__name">{name}</p>
-      </div>
-      <button className="user-row__btn">Добавить</button>
-    </Link>
+    <div href="" className="user-row__left">
+      <img
+        onClick={clickHandler}
+        src={img ? img : ""}
+        alt=""
+        className="user-row__img"
+      />
+      <p onClick={clickHandler} className="user-row__name">
+        {name}
+      </p>
+    </div>
   );
 }
+
+UserRow.propTypes = {
+  className: PropTypes.string,
+  name: PropTypes.string,
+  img: PropTypes.string,
+  clickHandler: PropTypes.func,
+};
 
 export default UserRow;

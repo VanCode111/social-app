@@ -8,6 +8,7 @@
   &__img {
     width: 40px;
     border-radius: 100px;
+    cursor: pointer;
   }
   &__left {
     display: flex;
@@ -15,6 +16,7 @@
   }
   &__name {
     margin-left: 14px;
+    cursor: pointer;
   }
   &__btn {
     border: 1px solid #00acff;
