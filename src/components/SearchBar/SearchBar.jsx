@@ -1,10 +1,12 @@
 import React from "react";
 import "./SearchBar.scss";
+import PropTypes from "prop-types";
 
-function SearchBar({ placeholder, className, onChange }) {
+function SearchBar({ placeholder, className, onChange, onClick }) {
   return (
     <div className={"search-bar " + className}>
       <input
+        onClick={onClick}
         onChange={onChange}
         placeholder={placeholder}
         type="text"
@@ -14,5 +16,12 @@ function SearchBar({ placeholder, className, onChange }) {
     </div>
   );
 }
+
+SearchBar.propTypes = {
+  placeholder: PropTypes.string,
+  className: PropTypes.string,
+  onChange: PropTypes.func,
+  onClick: PropTypes.func,
+};
 
 export default SearchBar;
