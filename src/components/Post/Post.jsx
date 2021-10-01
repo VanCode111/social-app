@@ -3,6 +3,8 @@ import "./Post.scss";
 import { MdDelete } from "react-icons/md";
 import ButtonIcon from "../UI/ButtonIcon/ButtonIcon";
 import { BellIcon } from "../Icons";
+import { Settings } from "../Icons";
+import MouseOverHandler from "../Handlers/MouseOverHandler";
 import UserRow from "../UserRow/UserRow";
 import PropTypes from "prop-types";
 import IconText from "../UI/IconText/IconText";
@@ -36,7 +38,9 @@ function Post({ className, profile, authorLink, text }) {
               onClick={() => setDropDownIsOpen((prev) => !prev)}
               className="post__setting"
             >
-              <BellIcon />
+              <MouseOverHandler mouseOverHandle={() => setDropDownIsOpen(true)}>
+                <Settings />
+              </MouseOverHandler>
             </ButtonIcon>
           }
         >

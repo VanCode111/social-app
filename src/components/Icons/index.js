@@ -1,3 +1,5 @@
+import Settings from "./Settings";
+export { Settings };
 export { default as HomeIcon } from "./HomeIcon";
 export { default as BusyIcon } from "./BusyIcon";
 export { default as ComunityIcon } from "./ComunityIcon";
