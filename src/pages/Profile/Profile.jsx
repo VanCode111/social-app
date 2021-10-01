@@ -5,47 +5,27 @@ import Loader from "../../components/Loader/Loader";
 import Button from "../../components/UI/Button/Button";
 import { useSelector, useDispatch } from "react-redux";
 import { uploadImage } from "../../http/ProfileAPI";
-import SyncLoader from "react-spinners/MoonLoader";
-import { getProfilePosts } from "../../http/ProfileAPI";
-
-import PostCreator from "../../components/PostCreator/PostCreator";
+import Wall from "./Wall/Wall";
 import { setImage } from "../../store/authSlice";
 
 function Profile({ user, link }) {
   const [file, setFile] = useState(null);
   const dispatch = useDispatch();
-  const [posts, setPosts] = useState([]);
   const userAuth = useSelector((store) => store.auth);
   const ownPage = link ? userAuth.user.link === "/" + link : false;
-  const [loading, setLoadig] = useState(false);
-  console.log(user);
-  const getPosts = async (userId) => {
-    setLoadig(true);
-    try {
-      const posts = await getProfilePosts({ userId });
-      setPosts(posts);
-      setLoadig(false);
-    } catch (e) {
-      console.log(e);
-    }
-  };
+
   const selectFile = async (e) => {
-    console.log(e.target.files);
     const img = e.target.files[0];
     if (!img) {
       return;
     }
     const formData = new FormData();
     formData.append("img", img);
-    console.log("asafsaga", user);
     formData.append("userId", user.user);
     try {
       const res = await uploadImage(formData);
-
-      console.log("asfasf", res);
       setFile(res);
       dispatch(setImage(res));
-      console.log(res);
     } catch (e) {
       console.log(e);
     }
@@ -54,12 +34,7 @@ function Profile({ user, link }) {
     if (file) {
       setFile(null);
     }
-    if (user) {
-      getPosts(user.user);
-      document.title = user.name + " " + user.lastName;
-    }
   }, [user]);
-  console.log(user);
   return (
     <div className="profile">
       <Template
@@ -97,18 +72,12 @@ function Profile({ user, link }) {
                 )}
               </p>
             </div>
-            {
-              <PostCreator
-                postCreator={ownPage}
-                loading={loading}
-                loadingSpinner={
-                  <SyncLoader color="#00acff" loading={loading} size={50} />
-                }
-                userId={user ? user.user : null}
-                posts={posts}
-                className="profile__post-card"
-              />
-            }
+
+            <Wall
+              className="profile__wall"
+              userId={user.user}
+              postCreator={ownPage}
+            />
           </div>
         }
       />

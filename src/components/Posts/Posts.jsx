@@ -3,7 +3,6 @@ import "./Posts.scss";
 import { Post } from "../../components";
 
 function Posts({ className, posts }) {
-  console.log(posts);
   return (
     <div className={"posts " + className}>
       {posts.map(({ text, authorLink, profile }) => {

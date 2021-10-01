@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 
 function MouseOverHandler({ children, mouseOverHandle, outDelay }) {
   const contentRef = useRef();
+  let currentElement;
   outDelay = outDelay ? outDelay : 400;
   let isOpen = true;
   let interval;
@@ -21,17 +22,20 @@ function MouseOverHandler({ children, mouseOverHandle, outDelay }) {
   const mouseOver = () => {
     isOpen = false;
   };
-
   useEffect(() => {
     if (contentRef) {
-      contentRef.current.addEventListener("mouseout", mouseOut);
-      contentRef.current.addEventListener("mouseover", mouseOver);
+      currentElement = contentRef.current;
+      currentElement.addEventListener("mouseout", mouseOut);
+      currentElement.addEventListener("mouseover", mouseOver);
     }
     return () => {
-      contentRef.current.removeEventListener("mouseover", mouseOver);
-      contentRef.current.addEventListener("mouseout", mouseOut);
+      if (interval) {
+        clearTimeout(interval);
+      }
+      currentElement.removeEventListener("mouseout", mouseOut);
+      currentElement.removeEventListener("mouseover", mouseOver);
     };
-  }, [contentRef]);
+  }, []);
 
   return <div ref={contentRef}>{children}</div>;
 }

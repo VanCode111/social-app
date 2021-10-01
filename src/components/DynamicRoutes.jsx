@@ -7,20 +7,13 @@ import Profile from "../pages/Profile/Profile";
 import LoadScreen from "./LoadScreen/LoadScreen";
 
 function DynamicRoutes() {
-  const override = {
-    display: "block",
-    margin: "0 auto",
-  };
   const location = useLocation();
-  console.log(location.state);
   const pathName = location.pathname;
   const link = pathName.slice(1);
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(location?.state?.profile);
   const [founded, setFounded] = useState(true);
   useEffect(async () => {
     if (location.state) {
-      setUser(location.state.profile);
-      console.log("asfasf", location.state);
       return;
     }
     setUser(null);
@@ -33,7 +26,7 @@ function DynamicRoutes() {
   }, [location]);
   return (
     <div className="dynamic-route">
-      {location.state || user ? (
+      {user ? (
         <Main>{<Profile user={user} link={link} />}</Main>
       ) : (
         <LoadScreen />

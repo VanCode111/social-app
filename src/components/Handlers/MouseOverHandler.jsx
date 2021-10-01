@@ -3,17 +3,21 @@ import PropTypes from "prop-types";
 
 function MouseOverHandler({ children, mouseOverHandle }) {
   const contentRef = useRef();
-
+  let currentElement;
   const mouseOver = () => {
     mouseOverHandle();
   };
 
   useEffect(() => {
     if (contentRef) {
-      contentRef.current.addEventListener("mouseover", mouseOver);
+      currentElement = contentRef.current;
+      currentElement.addEventListener("mouseover", mouseOver);
     }
+  }, []);
+
+  useEffect(() => {
     return () => {
-      contentRef.current.removeEventListener("mouseover", mouseOver);
+      currentElement.removeEventListener("mouseover", mouseOver);
     };
   }, [contentRef]);
 

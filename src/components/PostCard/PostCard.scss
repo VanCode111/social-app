@@ -3,6 +3,15 @@
   overflow: hidden;
   background-color: #fff;
   min-width: 570px;
+  &__content {
+    width: calc(100% - 25px - 15px - 40px);
+    padding: 0px 15px 15px 0px;
+  }
+  &__photo {
+    width: 100%;
+    display: block;
+    border-radius: 10px;
+  }
   &__bottom {
     height: 70px;
     background: rgba(210, 240, 255, 0.41);

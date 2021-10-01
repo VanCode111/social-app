@@ -1,5 +1,6 @@
 import Settings from "./Settings";
-export { Settings };
+import PhotoIcon from "./PhotoIcon";
+export { Settings, PhotoIcon };
 export { default as HomeIcon } from "./HomeIcon";
 export { default as BusyIcon } from "./BusyIcon";
 export { default as ComunityIcon } from "./ComunityIcon";
