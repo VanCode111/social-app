@@ -7,28 +7,23 @@ import PersonIcon from "../../assets/img/PersonIcon.png";
 import InputFile from "../UI/InputFile/InputFile";
 import IconText from "../UI/IconText/IconText";
 import PlayIcon from "../Icons/PlayIcon";
+import DeleteWrapper from "../Wrappers/DeleteWrapper/DeleteWrapper";
 function PostCard({ className, addPost, onClick }) {
   const [text, setText] = useState("");
-  const [photos, setPhotos] = useState([]);
+  const [photo, setPhoto] = useState(null);
   const changeText = (event) => {
     console.log(event.target.value);
     setText(event.target.value);
   };
 
-  const createUrlFile = (file) => {
-    const fileUrl = URL.createObjectURL(file);
-    return fileUrl;
-  };
-
-  const addPostHandler = () => {
-    addPost({ text });
-    setText("");
+  const deletePhoto = () => {
+    setPhoto(null);
   };
 
   const uploadPhoto = (e) => {
-    const files = [...e.target.files];
-    const urlPhotos = files.map((photo) => createUrlFile(photo));
-    setPhotos(urlPhotos);
+    const file = e.target.files[0];
+    const fileUrl = URL.createObjectURL(file);
+    setPhoto({ fileUrl, file });
   };
 
   const createPost = () => {
@@ -55,9 +50,11 @@ function PostCard({ className, addPost, onClick }) {
             className="post-card__input"
             minRows="3"
           />
-          {photos.map((photo) => {
-            return <img className="post-card__photo" src={photo} />;
-          })}
+          {photo && (
+            <DeleteWrapper clickDelete={deletePhoto}>
+              <img className="post-card__photo" src={photo.fileUrl} />
+            </DeleteWrapper>
+          )}
         </div>
       </div>
       <div className="post-card__bottom">
