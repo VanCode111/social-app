@@ -26,6 +26,9 @@ function Auth() {
       dispatch(setUser({ profile: res.profile, link: "/" + res.router.path }));
       console.log(res);
     } catch (e) {
+      if (e.response) {
+        console.log(e.response.data);
+      }
       console.log(e);
     }
   };

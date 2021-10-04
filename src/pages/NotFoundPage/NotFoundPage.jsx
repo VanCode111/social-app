@@ -1,5 +1,6 @@
 import React from "react";
 import "./NotFoundPage.scss";
+import { Header } from "../../components";
 
 function NotFoundPage() {
   return (

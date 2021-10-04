@@ -32,6 +32,7 @@ function PostCard({ className, addPost, onClick }) {
     }
     const post = {
       text,
+      photo: photo && photo.file,
     };
 
     onClick(post);

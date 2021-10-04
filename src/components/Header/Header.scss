@@ -23,3 +23,15 @@
     margin-left: auto;
   }
 }
+
+@media (max-width: 1000px) {
+  .header {
+    &__search-box {
+      display: none;
+    }
+    &__logo {
+      display: none;
+    }
+    grid-template-columns: 1fr;
+  }
+}

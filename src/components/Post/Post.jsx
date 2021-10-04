@@ -11,8 +11,10 @@ import IconText from "../UI/IconText/IconText";
 import CellButton from "../UI/CellButton/CellButton";
 import DropDown from "../UI/DropDown/DropDown";
 import { useHistory } from "react-router-dom";
-function Post({ className, profile, authorLink, text }) {
+function Post({ className, profile, authorLink, post, deletePost }) {
   const history = useHistory();
+  const text = post.text;
+  const postPhoto = post.photo;
   const [dropDownIsOpen, setDropDownIsOpen] = useState(false);
   const { name, lastName, profileImage } = profile;
   const authorName = name + " " + lastName;
@@ -44,7 +46,7 @@ function Post({ className, profile, authorLink, text }) {
             </ButtonIcon>
           }
         >
-          <CellButton>
+          <CellButton onClick={deletePost}>
             <IconText
               icon={<MdDelete color="gray" size="1.5em" />}
               text="Удалить"
@@ -54,6 +56,7 @@ function Post({ className, profile, authorLink, text }) {
       </div>
       <div className="post__content">
         <p className="post__text">{text}</p>
+        <img src={postPhoto} alt="" className="post__img" />
       </div>
     </div>
   );
@@ -63,8 +66,9 @@ Post.propTypes = {
   authorName: PropTypes.string.isRequired,
   authorImage: PropTypes.string.isRequired,
   authorLink: PropTypes.string.isRequired,
-  text: PropTypes.string,
+  post: PropTypes.object.isRequired,
   className: PropTypes.string,
+  deletePost: PropTypes.func,
 };
 
 export default Post;

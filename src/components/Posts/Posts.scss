@@ -1,5 +1,13 @@
 .posts {
+  transition: all 0.6s;
   &__post {
     margin-top: 24px;
+    opacity: 1;
   }
+}
+
+.example-exit-active {
+  opacity: 0;
+  transform: translate(100%, 200%);
+  transition: all 1s;
 }

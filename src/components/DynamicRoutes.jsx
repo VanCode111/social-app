@@ -26,12 +26,17 @@ function DynamicRoutes() {
   }, [location]);
   return (
     <div className="dynamic-route">
-      {user ? (
-        <Main>{<Profile user={user} link={link} />}</Main>
-      ) : (
-        <LoadScreen />
+      {founded &&
+        (user ? (
+          <Main>{<Profile user={user} link={link} />}</Main>
+        ) : (
+          <LoadScreen />
+        ))}
+      {!founded && (
+        <Main>
+          <NotFoundPage />
+        </Main>
       )}
-      {!founded && <NotFoundPage />}
     </div>
   );
 }

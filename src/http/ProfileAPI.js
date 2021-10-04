@@ -1,15 +1,12 @@
-import { $host } from "./index";
+import { $host, $authHost } from "./index";
 
 const uploadImage = async (img) => {
   const { data } = await $host.post("/uploadimage", img);
   return data;
 };
 
-const createPost = async ({ userId, text }) => {
-  const { data } = await $host.post("/createpost", {
-    userId,
-    text,
-  });
+const createPost = async (formData) => {
+  const { data } = await $host.post("/createpost", formData);
   return data;
 };
 
@@ -20,4 +17,9 @@ const getProfilePosts = async ({ userId }) => {
   return data;
 };
 
-export { uploadImage, createPost, getProfilePosts };
+const deletePost = async ({ postId }) => {
+  const { data } = await $authHost.post("/deletepost", { postId });
+  return data;
+};
+
+export { uploadImage, createPost, getProfilePosts, deletePost };

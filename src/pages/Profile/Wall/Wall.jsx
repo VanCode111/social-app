@@ -6,14 +6,29 @@ import SyncLoader from "react-spinners/MoonLoader";
 import { PostCard } from "../../../components";
 import { Posts } from "../../../components";
 import { getProfilePosts } from "../../../http/ProfileAPI";
-import { createPost } from "../../../http/ProfileAPI";
+import { createPost, deletePost } from "../../../http/ProfileAPI";
 
 function Wall({ userId, postCreator, className }) {
   const [loading, setLoading] = useState(false);
   const [posts, setPosts] = useState([]);
   const postCreate = async (post) => {
+    const formData = new FormData();
+    formData.append("text", post.text);
+    formData.append("photo", post.photo);
+    formData.append("userId", userId);
     try {
-      const res = await createPost({ userId, text: post.text });
+      const res = await createPost(formData);
+      console.log(res);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  console.log(posts);
+  const deletePostHandle = async (index, postId) => {
+    console.log(postId);
+    try {
+      const res = await deletePost({ postId });
+      console.log(res);
     } catch (e) {
       console.log(e);
     }
@@ -25,6 +40,7 @@ function Wall({ userId, postCreator, className }) {
       const posts = await getProfilePosts({ userId });
       setPosts(posts);
       setLoading(false);
+      console.log(posts);
     } catch (e) {
       console.log(e);
     }
@@ -41,7 +57,7 @@ function Wall({ userId, postCreator, className }) {
           <SyncLoader color="#00acff" loading={loading} size={50} />
         </div>
       ) : (
-        <Posts posts={posts} />
+        <Posts deletePost={deletePostHandle} posts={posts} />
       )}
     </div>
   );

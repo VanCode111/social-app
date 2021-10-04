@@ -16,7 +16,8 @@ const login = async ({ email, password }) => {
     email,
     password,
   });
-  console.log();
+  console.log(data.accessToken);
+  localStorage.setItem("token", data.accessToken);
   return data;
 };
 
