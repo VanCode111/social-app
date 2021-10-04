@@ -1,4 +1,4 @@
-const userModel = require("../models/user-model");
+const profileModel = require("../models/profile-model");
 const routerModel = require("../models/router-model");
 
 class objectsController {
@@ -7,7 +7,7 @@ class objectsController {
       let { subString } = req.body;
       subString = subString.trim().split(" ");
       console.log(subString[0]);
-      let users = await userModel.find({
+      let users = await profileModel.find({
         fullName: {
           $regex: subString[0].toLowerCase(),
         },
@@ -18,10 +18,9 @@ class objectsController {
         },
       });
       for (let i = 0; i < users.length; i++) {
-        const { path } = await routerModel.findOne({ user: users[i]._id });
+        const { path } = await routerModel.findOne({ user: users[i].user });
         users[i] = {
-          name: users[i].name,
-          lastName: users[i].lastName,
+          profile: users[i],
           link: "/" + path,
         };
       }

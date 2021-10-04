@@ -9,7 +9,7 @@ class RouterController {
       console.log(response);
       res.json(response);
     } catch (e) {
-      console.log(e);
+      res.status(500).json(e);
     }
   }
 }

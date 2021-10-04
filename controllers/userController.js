@@ -15,7 +15,7 @@ class UserController {
       );
       res.json(response);
     } catch (e) {
-      console.log(e);
+      res.status(500).json(e.message);
     }
   }
   async login(req, res, next) {
@@ -24,16 +24,20 @@ class UserController {
       const response = await userService.login({ email, password });
       res.json(response);
     } catch (e) {
-      console.log(e);
+      res.status(500).json(e);
     }
   }
   async check(req, res, next) {
-    const { accessToken } = tokenService.generateToken({
-      id: req.user.id,
-      email: req.user.email,
-    });
-    const router = await routerModel.findOne({ user: req.user.id });
-    return res.json({ accessToken, link: router.path });
+    try {
+      const { accessToken } = tokenService.generateToken({
+        id: req.body.user.id,
+        email: req.body.user.email,
+      });
+      const router = await routerModel.findOne({ user: req.body.user.id });
+      return res.json({ accessToken, link: router.path });
+    } catch (e) {
+      res.status(500).json(e);
+    }
   }
 }
 

@@ -9,8 +9,8 @@ const expressUpload = require("express-fileupload");
 const path = require("path");
 const PORT = process.env.PORT || 5000;
 
-app.use(expressUpload());
 app.use(express.static(path.resolve(__dirname, "static")));
+app.use(expressUpload());
 app.use(express.json());
 app.use(cors());
 app.use(cookieParser());

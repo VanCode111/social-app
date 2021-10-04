@@ -7,9 +7,6 @@ const UserSchema = new Schema({
     required: true,
     index: true,
   },
-  name: { type: String, required: true },
-  lastName: { type: String, required: true },
-  fullName: { type: String, required: true },
   password: { type: String, required: true },
 });
 
