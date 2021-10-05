@@ -6,7 +6,7 @@ import { MdDelete } from "react-icons/md";
 import "./PostWrapper";
 import PropTypes from "prop-types";
 import Post from "../../Post/Post";
-import TextareaAutosize from "react-textarea-autosize";
+import TextArea from "../../UI/TextArea/TextArea";
 import DeleteWrapper from "../../Wrappers/DeleteWrapper/DeleteWrapper";
 import PostPanel from "../../UI/PostPanel/PostPanel";
 
@@ -26,6 +26,7 @@ function PostWrapper({ className, profile, authorLink, post, deletePost }) {
   };
 
   const deletePostHandle = () => {
+    setIsEdit(false);
     setIsDel(true);
   };
   const deletePhoto = () => {
@@ -71,15 +72,13 @@ function PostWrapper({ className, profile, authorLink, post, deletePost }) {
           bottom={isEdit && <PostPanel createPost={() => setIsEdit(false)} />}
         >
           {isEdit ? (
-            <TextareaAutosize
+            <TextArea
               onChange={changeText}
               value={textPost}
               placeholder="Что у вас нового?"
-              className="post-card__input"
-              minRows="3"
             />
           ) : (
-            <p className="post__text">{text}</p>
+            <p className="post-wrapper__text">{textPost}</p>
           )}
           {photo &&
             wrapItemEdit(

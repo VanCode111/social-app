@@ -1,5 +1,8 @@
 .post-wrapper {
   transition: opacity 0.3s;
+  &__text {
+    padding: 10px 5px;
+  }
   &.deleted {
     opacity: 0.5;
     pointer-events: none;
