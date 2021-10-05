@@ -1,0 +1,7 @@
+.post-wrapper {
+  transition: opacity 0.3s;
+  &.deleted {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+}
