@@ -3,21 +3,22 @@ import { findObjects } from "../../http/objectsAPI";
 import { SearchBar } from "..";
 import UserRow from "../UserRow/UserRow";
 import ClickOutside from "../ClickOutside/ClickOutside";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import SyncLoader from "react-spinners/MoonLoader";
 import "./SearchHelper.scss";
 function SearchHelper() {
-  // const history = useHistory();
+  const history = useHistory();
   const [isLoading, setIsLoading] = useState(false);
   const [objects, setObjects] = useState([]);
   const [dropDownOpen, setDropDownOpen] = useState(false);
   const typing = (e) => {
-    setIsLoading(true);
     setDropDownOpen(true);
-    setTimeout(() => {
-      findHandle(e.target.value);
-      setIsLoading(false);
-    }, 100);
+    findHandle(e.target.value);
+    setIsLoading(false);
+  };
+  const clickName = ({ link, profile }) => {
+    setDropDownOpen(false);
+    history.push({ pathname: link, state: { profile } });
   };
 
   const clickOutSide = () => {
@@ -28,7 +29,7 @@ function SearchHelper() {
   };
   const findHandle = async (str) => {
     try {
-      if (str.trim() === "") {
+      if (str.trim().length < 2) {
         setObjects([]);
         return;
       }
@@ -48,8 +49,8 @@ function SearchHelper() {
           onChange={typing}
           placeholder="Поиск"
         />
-        {objects.length > 0 && dropDownOpen && (
-          <div className={"search-helper__box open"}>
+        {objects.length > 0 && (
+          <div className={"search-helper__box " + (dropDownOpen ? "open" : "")}>
             {isLoading ? (
               <div className="search-helper__loading">
                 <SyncLoader color="#00acff" loading={true} size={40} />
@@ -61,6 +62,9 @@ function SearchHelper() {
                   <UserRow
                     className="search-helper__item"
                     path={obj.link}
+                    clickHandler={() =>
+                      clickName({ link: obj.link, profile: obj.profile })
+                    }
                     profile={obj.profile}
                     img={obj.profile.profileImage}
                     name={`${obj.profile.name} ${obj.profile.lastName}`}

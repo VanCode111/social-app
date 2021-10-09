@@ -47,7 +47,7 @@ function Wall({ userId, postCreator, className }) {
   };
   useEffect(() => {
     getPosts(userId);
-  }, []);
+  }, [userId]);
 
   return (
     <div className={className ? className : ""}>
