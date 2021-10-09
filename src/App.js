@@ -13,7 +13,7 @@ function App() {
     try {
       const res = await check();
       dispatch(setAuth(true));
-      dispatch(setUser({ link: "/" + res.link }));
+      dispatch(setUser({ link: "/" + res.link, profile: res.profile }));
     } catch (e) {
       console.log(e);
     }

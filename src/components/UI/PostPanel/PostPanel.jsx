@@ -15,17 +15,6 @@ function PostPanel({ uploadPhoto, createPost }) {
             <IconText text="Фото" icon={<PhotoIcon />} />
           </InputFile>
         </li>
-        <li className="post-card__item">
-          <InputFile onChange={uploadPhoto}>
-            <IconText text="Видео" icon={<PlayIcon />} />
-          </InputFile>
-        </li>
-        <li className="post-card__item">
-          <button className="post-card__item-btn">Событие</button>
-        </li>
-        <li className="post-card__item">
-          <button className="post-card__item-btn">Статья</button>
-        </li>
       </ul>
       <button onClick={createPost} className="post-card__btn">
         <MessageIcon />

@@ -31,6 +31,7 @@ function Profile({ user, link }) {
     }
   };
   useEffect(() => {
+    document.title = user.name + " " + user.lastName;
     if (file) {
       setFile(null);
     }

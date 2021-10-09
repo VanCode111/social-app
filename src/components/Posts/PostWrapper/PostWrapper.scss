@@ -1,7 +1,11 @@
 .post-wrapper {
   transition: opacity 0.3s;
+  width: 100%;
   &__text {
     padding: 10px 5px;
+    word-wrap: break-word;
+
+    width: 100%;
   }
   &.deleted {
     opacity: 0.5;

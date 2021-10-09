@@ -3,6 +3,7 @@ import List from "../List/List";
 import MusicItem from "../MusicItem/MusicItem";
 import { useSelector, useDispatch } from "react-redux";
 import { setMusic, setTracks } from "../../store";
+import { getMusic } from "../../http/musicAPI";
 import Loader from "../../components/Loader/Loader";
 
 function OwnMusic({ handleMusic, audio }) {
@@ -12,8 +13,7 @@ function OwnMusic({ handleMusic, audio }) {
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     const getTracks = async () => {
-      const response = await fetch("http://localhost:3000/tracks");
-      const res = await response.json();
+      const res = await getMusic();
       setTrack(res);
       dispatch(setTracks(res));
       setLoading(false);

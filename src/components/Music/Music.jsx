@@ -5,6 +5,7 @@ import { setMusic, setTracks } from "../../store";
 import { playMusic } from "../../audio";
 import Tabs from "../Tabs/Tabs";
 import OwnMusic from "../OwnMusic/OwnMusic";
+import { getMusic, musicAPI } from "../../http/musicAPI";
 
 let interval;
 
@@ -30,8 +31,7 @@ function Music({ audio }) {
   useEffect(() => {
     document.title = "Музыка";
     const getTracks = async () => {
-      const response = await fetch("http://localhost:3000/tracks");
-      const res = await response.json();
+      const res = await getMusic();
       setTrack(res);
       dispatch(setTracks(res));
       setLoading(false);
