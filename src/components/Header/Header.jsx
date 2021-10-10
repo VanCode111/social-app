@@ -31,7 +31,7 @@ function Header({ isAuth, user }) {
       icon: <BellIcon width="28" height="28" />,
     },
     {
-      path: "/comunitys",
+      path: "/messenger",
       icon: <MessageIcon width="28" height="28" />,
     },
     {

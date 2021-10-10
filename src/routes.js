@@ -3,6 +3,7 @@ import { Main } from "./pages";
 import Comunity from "./pages/Comunity";
 import Auth from "./pages/Auth/Auth";
 import Music from "./components/Music/Music";
+import Messenger from "./pages/Messenger/Messenger";
 
 export const routes = [
   {
@@ -24,6 +25,10 @@ export const authRoutes = [
     path: "/profile",
     component: Main,
   },
+  {
+    path: "/messenger",
+    component: Main,
+  },
 ];
 
 export const mainRoutes = [
@@ -34,5 +39,9 @@ export const mainRoutes = [
   {
     path: "/profile",
     component: Music,
+  },
+  {
+    path: "/messenger",
+    component: Messenger,
   },
 ];

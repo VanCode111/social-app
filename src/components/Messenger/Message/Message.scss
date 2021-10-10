@@ -1,0 +1,25 @@
+.message {
+  display: flex;
+  gap: 10px;
+  align-items: end;
+  &__content {
+    color: white;
+    background-color: #00acff;
+    border-radius: 18px 18px 18px 0px;
+    max-width: 300px;
+  }
+  &.right {
+    flex-direction: row-reverse;
+  }
+  &.right &__content {
+    border-radius: 18px 18px 0px 18px;
+  }
+  &__avatar {
+    width: 20px;
+    height: 20px;
+    border-radius: 100px;
+  }
+  &__text {
+    padding: 15px;
+  }
+}

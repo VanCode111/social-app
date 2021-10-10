@@ -15,7 +15,7 @@ function DynamicRoutes() {
   useEffect(async () => {
     if (location.state) {
       setUser(location.state.profile);
-
+      setFounded(true);
       return;
     }
     setUser(null);
