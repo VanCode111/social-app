@@ -1,10 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
+import "./ButtonIcon.scss";
 
 function ButtonIcon({ className, children, onClick, width, height }) {
   return (
     <button
-      className={className ? className : ""}
+      className={"button-icon " + (className ? className : "")}
       style={{ width: width && width, height: height && height }}
       onClick={onClick}
     >

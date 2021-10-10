@@ -7,7 +7,12 @@
     background-color: #00acff;
     border-radius: 18px 18px 18px 0px;
     max-width: 300px;
+    &.gray {
+      background-color: rgba(0, 0, 0, 0.034);
+      color: black;
+    }
   }
+
   &.right {
     flex-direction: row-reverse;
   }
