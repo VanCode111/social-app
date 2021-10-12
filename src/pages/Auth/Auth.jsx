@@ -38,7 +38,6 @@ function Auth() {
     setPassword("");
     setIsLogin((prev) => !prev);
   };
-
   return (
     <div className="auth">
       <Header />

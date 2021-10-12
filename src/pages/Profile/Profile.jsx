@@ -6,13 +6,20 @@ import Button from "../../components/UI/Button/Button";
 import { useSelector, useDispatch } from "react-redux";
 import { uploadImage } from "../../http/ProfileAPI";
 import Wall from "./Wall/Wall";
+import { useHistory } from "react-router-dom";
 import { setImage } from "../../store/authSlice";
 
 function Profile({ user, link }) {
+  const history = useHistory();
+  console.log("user", user);
   const [file, setFile] = useState(null);
   const dispatch = useDispatch();
   const userAuth = useSelector((store) => store.auth);
   const ownPage = link ? userAuth.user.link === "/" + link : false;
+
+  const sendMessage = () => {
+    history.push(`/messenger/${user._id}`);
+  };
 
   const selectFile = async (e) => {
     const img = e.target.files[0];
@@ -59,6 +66,11 @@ function Profile({ user, link }) {
                 </div>
               )}
             </div>
+            <Button
+              text="Написать сообщение"
+              onClick={sendMessage}
+              className="profile__sub"
+            />
             {!ownPage && <Button text="Добавить" className="profile__sub" />}
           </div>
         }

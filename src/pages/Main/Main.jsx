@@ -17,22 +17,22 @@ function Home({ children }) {
             <div className="main__left-menu">
               <LeftMenu user={user} audio={audio} />
             </div>
-            {children}
-            {mainRoutes.map(({ path, component }, index) => {
-              return (
-                <Route
-                  key={index}
-                  audio={audio}
-                  path={path}
-                  render={(routeProps) =>
-                    React.createElement(component, {
-                      audio: audio,
-                      ...routeProps,
-                    })
-                  }
-                />
-              );
-            })}
+            {children ||
+              mainRoutes.map(({ path, component }, index) => {
+                return (
+                  <Route
+                    key={index}
+                    audio={audio}
+                    path={path}
+                    render={(routeProps) =>
+                      React.createElement(component, {
+                        audio: audio,
+                        ...routeProps,
+                      })
+                    }
+                  />
+                );
+              })}
           </div>
         </div>
       </div>

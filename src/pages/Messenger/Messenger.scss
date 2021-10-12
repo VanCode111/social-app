@@ -1,3 +1,16 @@
 .messenger {
   width: 600px;
+
+  &__card,
+  &__empty {
+    height: calc(100vh - 114px);
+    width: 100%;
+    background-color: #fff;
+    border-radius: 18px;
+  }
+  &__empty {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }

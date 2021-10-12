@@ -1,20 +1,57 @@
 .messages {
   background-color: #fff;
   border-radius: 18px;
-  padding: 15px;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 
   justify-content: space-between;
   &__items {
     overflow-y: scroll;
+    margin-right: 5px;
+    padding: 15px 25px;
     scroll-margin-inline-start: 0px;
     max-height: calc(100% - 50px);
     height: 100%;
-    padding-right: 10px;
+    &::-webkit-scrollbar {
+      width: 5px;
+    }
+
+    &::-webkit-scrollbar-track {
+      -webkit-box-shadow: 5px 5px 5px -5px rgba(34, 60, 80, 0.2) inset;
+      background-color: #f9f9fd;
+      border-radius: 10px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      border-radius: 10px;
+      background: #00c6fb;
+    }
   }
-  height: calc(100vh - 114px - 15px);
+  &__top {
+    font-size: 21px;
+    //padding-bottom: 10px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.103);
+  }
+  &__title {
+    font-size: 21px;
+    font-weight: 400;
+    margin: 0px;
+  }
+  &__top-inner {
+    display: flex;
+    align-items: center;
+    margin: 15px;
+  }
+  &__bottom {
+    padding: 15px;
+    background-color: #fff;
+  }
+  height: calc(100vh - 114px);
   &__message {
     margin-bottom: 15px;
+  }
+  &__no-message {
+    text-align: center;
   }
 }

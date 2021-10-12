@@ -3,14 +3,26 @@ import { routes, authRoutes } from "../routes";
 import { Route, Switch, useLocation, Redirect } from "react-router-dom";
 import { useSelector } from "react-redux";
 import DynamicRoutes from "./DynamicRoutes";
+import Main from "../pages/Main/Main";
 
 function Routes() {
   const isAuth = useSelector(({ auth }) => auth.isAuth);
   const location = useLocation();
   const pathName = location.pathname;
-
   const renderRoutes = (routes) => {
-    routes = routes.map(({ path, component }, index) => {
+    routes = routes.map(({ path, component, layout = null }, index) => {
+      if (layout) {
+        return (
+          <Route
+            key={index}
+            exact={true}
+            path={path}
+            render={() =>
+              React.createElement(layout, null, React.createElement(component))
+            }
+          />
+        );
+      }
       return (
         <Route key={index} exact={true} path={path} component={component} />
       );

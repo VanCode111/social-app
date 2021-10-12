@@ -27,7 +27,13 @@ export const authRoutes = [
   },
   {
     path: "/messenger",
-    component: Main,
+    component: Messenger,
+    layout: Main,
+  },
+  {
+    path: "/messenger/:id",
+    component: Messenger,
+    layout: Main,
   },
 ];
 
@@ -40,8 +46,9 @@ export const mainRoutes = [
     path: "/profile",
     component: Music,
   },
+
   {
-    path: "/messenger",
+    path: "/messenger/:id",
     component: Messenger,
   },
 ];
