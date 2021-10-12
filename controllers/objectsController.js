@@ -5,18 +5,15 @@ class objectsController {
   async findObjects(req, res, next) {
     try {
       let { subString } = req.body;
-      subString = subString.trim().split(" ");
+      subString = subString.trim();
       console.log(subString[0]);
-      let users = await profileModel.find({
-        fullName: {
-          $regex: subString[0].toLowerCase(),
-        },
-        fullName: {
-          $regex: subString[1]
-            ? subString[1].toLowerCase()
-            : subString[0].toLowerCase(),
-        },
-      });
+      let users = await profileModel
+        .find({
+          fullName: {
+            $regex: new RegExp("^" + subString + ".*", "i"),
+          },
+        })
+        .exec();
       for (let i = 0; i < users.length; i++) {
         const { path } = await routerModel.findOne({ user: users[i].user });
         users[i] = {

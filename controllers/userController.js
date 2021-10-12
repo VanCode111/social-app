@@ -1,7 +1,7 @@
 const userService = require("../services/userService");
 const tokenService = require("../services/tokenService");
 const routerModel = require("../models/router-model");
-const router = require("../router");
+const profileModel = require("../models/profile-model");
 
 class UserController {
   async registration(req, res, next) {
@@ -34,7 +34,9 @@ class UserController {
         email: req.body.user.email,
       });
       const router = await routerModel.findOne({ user: req.body.user.id });
-      return res.json({ accessToken, link: router.path });
+      const profile = await profileModel.findOne({ user: req.body.user.id });
+      console.log(profile);
+      return res.json({ accessToken, link: router.path, profile });
     } catch (e) {
       res.status(500).json(e);
     }
