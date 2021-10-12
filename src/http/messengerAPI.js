@@ -20,4 +20,13 @@ const getMessages = async ({ conversationId }) => {
   return data;
 };
 
-export { getConversations, getConversation, getMessages };
+const sendMessage = async ({ conversationUser, text, user }) => {
+  const { data } = await $host.post("/sendmessage", {
+    conversationUser,
+    text,
+    user,
+  });
+  return data;
+};
+
+export { getConversations, getConversation, getMessages, sendMessage };

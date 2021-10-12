@@ -14,20 +14,19 @@ function Messenger() {
   const pathname = location.pathname;
   const pathNames = pathname.split("/");
   const conversationId = pathNames[2];
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [conversation, setConversation] = useState(null);
   useEffect(async () => {
     document.title = "Сообщения";
     if (pathNames.length < 3) {
+      setLoading(false);
       return;
     }
-    setLoading(true);
     try {
       const res = await getConversationHandler({
         userId,
         conversationUser: conversationId,
       });
-      console.log(res, "agsagasgsagsaga");
       setConversation(res && res);
     } catch (e) {
       console.log(e);

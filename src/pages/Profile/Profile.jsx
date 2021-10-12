@@ -18,7 +18,7 @@ function Profile({ user, link }) {
   const ownPage = link ? userAuth.user.link === "/" + link : false;
 
   const sendMessage = () => {
-    history.push(`/messenger/${user._id}`);
+    history.push(`/messenger/${user.user}`);
   };
 
   const selectFile = async (e) => {

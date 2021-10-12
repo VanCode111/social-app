@@ -5,19 +5,31 @@ import ImagePerson from "../../../assets/img/PersonIcon.png";
 import AreaMessage from "../../UI/AreaMessage/AreaMessage";
 import ButtonIcon from "../../UI/ButtonIcon/ButtonIcon";
 import { PhotoIcon } from "../../Icons";
-import { getMessages } from "../../../http/messengerAPI";
+import TextSenderWrapper from "../wrappers/TextSenderWrapper/TextSenderWrapper";
+import { getMessages, sendMessage } from "../../../http/messengerAPI";
 import PropTypes from "prop-types";
 
-function Messages({ conversationId, conversationUser, userId }) {
+function Messages({ conversationId, conversationUser, user, userId }) {
   console.log(userId);
   const name = conversationUser.name;
   const lastName = conversationUser.lastName;
   const scroll = useRef();
   const [messages, setMessages] = useState([]);
   const [textMessage, setTextMessage] = useState("");
-  const changeText = (e) => {
-    setTextMessage(e.target.value);
+  const sendMessageHandler = async ({ text }) => {
+    try {
+      console.log("send message");
+      const res = await sendMessage({
+        conversationUser: conversationUser.user,
+        user: userId,
+        text,
+      });
+      console.log(res);
+    } catch (e) {
+      console.log(e);
+    }
   };
+
   useEffect(async () => {
     if (!conversationId) {
       return;
@@ -70,16 +82,7 @@ function Messages({ conversationId, conversationUser, userId }) {
       )}
 
       <div className="messages__bottom">
-        <AreaMessage
-          onChange={changeText}
-          onHeightChange={changeHeight}
-          placeholder="Новое сообщение"
-          rightSide={
-            <ButtonIcon>
-              <PhotoIcon />
-            </ButtonIcon>
-          }
-        />
+        <TextSenderWrapper sendMessage={sendMessageHandler} />
       </div>
     </div>
   );
