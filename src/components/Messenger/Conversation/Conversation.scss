@@ -1,0 +1,18 @@
+.conversation {
+  padding: 5px 15px;
+  display: flex;
+  color: #000;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.027);
+  &__right {
+    margin-left: 10px;
+  }
+  text-decoration: none;
+  &__avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 18px;
+  }
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.027);
+  }
+}

@@ -1,0 +1,8 @@
+.text-sender-wrapper {
+  display: flex;
+  align-items: center;
+  &__text {
+    width: 100%;
+    margin-right: 15px;
+  }
+}

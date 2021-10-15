@@ -9,7 +9,8 @@ import TextSenderWrapper from "../wrappers/TextSenderWrapper/TextSenderWrapper";
 import { getMessages, sendMessage } from "../../../http/messengerAPI";
 import PropTypes from "prop-types";
 
-function Messages({ conversationId, conversationUser, user, userId, socket }) {
+function Messages({ conversationId, conversationUser, user, socket }) {
+  const userId = user.profile.user;
   const name = conversationUser.name;
   const lastName = conversationUser.lastName;
   const scroll = useRef();
@@ -57,20 +58,7 @@ function Messages({ conversationId, conversationUser, user, userId, socket }) {
       } catch (e) {}
     };
     getMessagesHandle();
-  }, []);
-  const changeHeight = () => {
-    if (!scroll.current) {
-      return;
-    }
-    if (
-      scroll.current.scrollHeight -
-        scroll.current.clientHeight -
-        scroll.current.scrollTop <
-      16
-    ) {
-      scroll.current.scrollTop = scroll.current.scrollHeight;
-    }
-  };
+  }, [conversationUser]);
   return (
     <div className="messages">
       <div className="messages__top">
@@ -94,6 +82,11 @@ function Messages({ conversationId, conversationUser, user, userId, socket }) {
                   orientation={message.sender == userId ? "right" : "left"}
                   color={message.sender !== userId && "gray"}
                   className=""
+                  authorImage={
+                    message.sender == userId
+                      ? user.profile.profileImage
+                      : conversationUser.profileImage
+                  }
                   text={message.text}
                 />{" "}
               </div>

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import "./Conversations.scss";
-import PropTypes from "prop-types";
+import Conversation from "../Conversation/Conversation";
 import { getConversations } from "../../../http/messengerAPI";
 import UserRow from "../../UserRow/UserRow";
 
@@ -23,14 +23,7 @@ function Conversations() {
       {conversations.map((conversation) => {
         return (
           <div>
-            <UserRow
-              img={conversation.conversationUser?.profileImage}
-              name={
-                conversation.conversationUser?.name +
-                " " +
-                conversation.conversationUser?.lastName
-              }
-            />
+            <Conversation conversationUser={conversation.conversationUser} />
           </div>
         );
       })}

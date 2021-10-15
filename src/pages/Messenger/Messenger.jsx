@@ -44,7 +44,7 @@ function Messenger() {
       console.log(e);
     }
     setLoading(false);
-  }, []);
+  }, [location]);
 
   const getConversationHandler = async ({ userId, conversationUser }) => {
     const res = await getConversation({ userId, conversationUser });
@@ -58,11 +58,7 @@ function Messenger() {
           (!conversation ? (
             <div className="messenger__empty">Напишите сообщение</div>
           ) : (
-            <Messages
-              socket={socket.current}
-              {...conversation}
-              userId={userId}
-            />
+            <Messages socket={socket.current} {...conversation} user={user} />
           ))
         }
         otherCards={<Conversations />}

@@ -19,12 +19,13 @@
   &.right &__content {
     border-radius: 18px 18px 0px 18px;
   }
-  &__avatar {
-    width: 20px;
-    height: 20px;
+  .avatar {
+    width: 40px;
+    height: 40px;
     border-radius: 100px;
   }
   &__text {
+    word-wrap: break-word;
     padding: 15px;
   }
 }
