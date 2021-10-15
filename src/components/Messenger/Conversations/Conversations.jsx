@@ -17,7 +17,7 @@ function Conversations() {
       console.log(e);
     }
   }, []);
-  console.log(conversations);
+
   return (
     <div className="conversations">
       {conversations.map((conversation) => {

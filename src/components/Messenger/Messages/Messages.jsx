@@ -9,36 +9,54 @@ import TextSenderWrapper from "../wrappers/TextSenderWrapper/TextSenderWrapper";
 import { getMessages, sendMessage } from "../../../http/messengerAPI";
 import PropTypes from "prop-types";
 
-function Messages({ conversationId, conversationUser, user, userId }) {
-  console.log(userId);
+function Messages({ conversationId, conversationUser, user, userId, socket }) {
   const name = conversationUser.name;
   const lastName = conversationUser.lastName;
   const scroll = useRef();
+  const scrollRef = useRef();
   const [messages, setMessages] = useState([]);
   const [textMessage, setTextMessage] = useState("");
   const sendMessageHandler = async ({ text }) => {
-    try {
-      console.log("send message");
-      const res = await sendMessage({
-        conversationUser: conversationUser.user,
-        user: userId,
+    const message = {
+      conversationUser: conversationUser.user,
+      user: userId,
+      text,
+    };
+    setMessages((prev) => [
+      ...prev,
+      {
+        sender: userId,
         text,
-      });
-      console.log(res);
+      },
+    ]);
+    try {
+      await sendMessage(message);
+      socket?.emit("sendMessage", message);
     } catch (e) {
       console.log(e);
     }
   };
+  useEffect(() => {
+    scrollRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
 
-  useEffect(async () => {
+  useEffect(() => {
+    const getMessage = (message) => {
+      console.log(message);
+      setMessages((prev) => [...prev, message]);
+    };
+    console.log(socket);
+    socket.on("getMessage", getMessage);
     if (!conversationId) {
       return;
     }
-    try {
-      const res = await getMessages({ conversationId });
-      console.log(res);
-      setMessages(res);
-    } catch (e) {}
+    const getMessagesHandle = async () => {
+      try {
+        const res = await getMessages({ conversationId });
+        setMessages(res);
+      } catch (e) {}
+    };
+    getMessagesHandle();
   }, []);
   const changeHeight = () => {
     if (!scroll.current) {
@@ -66,9 +84,12 @@ function Messages({ conversationId, conversationUser, user, userId }) {
       ) : (
         <div ref={scroll} className="messages__items">
           {messages.map((message) => {
-            console.log(message.sender == userId);
             return (
-              <div className="messages__message" key={message._id}>
+              <div
+                ref={scrollRef}
+                className="messages__message"
+                key={message._id}
+              >
                 <Message
                   orientation={message.sender == userId ? "right" : "left"}
                   color={message.sender !== userId && "gray"}

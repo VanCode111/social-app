@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import "./Messenger.scss";
 import { useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -6,6 +6,7 @@ import Messages from "../../components/Messenger/Messages/Messages";
 import Template from "../../components/Template/Template";
 import Conversations from "../../components/Messenger/Conversations/Conversations";
 import { getConversation } from "../../http/messengerAPI";
+import { io } from "socket.io-client";
 
 function Messenger() {
   const { user } = useSelector((state) => state.auth);
@@ -15,7 +16,18 @@ function Messenger() {
   const pathNames = pathname.split("/");
   const conversationId = pathNames[2];
   const [loading, setLoading] = useState(true);
+  const socket = useRef();
   const [conversation, setConversation] = useState(null);
+  useEffect(() => {
+    socket.current = io("ws://localhost:8900");
+    socket.current.emit("addUser", userId);
+    socket.current.on("getMessage", (message) => {
+      console.log(message);
+    });
+    return () => {
+      socket.current.disconnect();
+    };
+  }, []);
   useEffect(async () => {
     document.title = "Сообщения";
     if (pathNames.length < 3) {
@@ -33,6 +45,7 @@ function Messenger() {
     }
     setLoading(false);
   }, []);
+
   const getConversationHandler = async ({ userId, conversationUser }) => {
     const res = await getConversation({ userId, conversationUser });
     return res;
@@ -45,7 +58,11 @@ function Messenger() {
           (!conversation ? (
             <div className="messenger__empty">Напишите сообщение</div>
           ) : (
-            <Messages {...conversation} userId={userId} />
+            <Messages
+              socket={socket.current}
+              {...conversation}
+              userId={userId}
+            />
           ))
         }
         otherCards={<Conversations />}
