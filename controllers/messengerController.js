@@ -85,12 +85,21 @@ class MessengerController {
   }
   async getMessages(req, res) {
     try {
-      const { conversationId } = req.body;
-      console.log(conversationId);
-      const messages = await messageModel.find({
-        conversationId: conversationId,
-      });
-      console.log(messages);
+      const { conversationId, limit, skip } = req.body;
+      let messages;
+      if (limit && skip != undefined) {
+        messages = await messageModel
+          .find({
+            conversationId: conversationId,
+          })
+          .skip(skip * limit)
+          .limit(limit);
+      } else {
+        messages = await messageModel.find({
+          conversationId: conversationId,
+        });
+      }
+
       res.json(messages);
     } catch (e) {
       console.log(e);
