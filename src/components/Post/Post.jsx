@@ -12,6 +12,7 @@ import CellButton from "../UI/CellButton/CellButton";
 import DropDown from "../UI/DropDown/DropDown";
 import { useHistory } from "react-router-dom";
 function Post({
+  ownPage,
   className,
   profile,
   authorLink,

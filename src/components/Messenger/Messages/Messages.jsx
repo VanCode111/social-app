@@ -1,10 +1,6 @@
 import React, { useRef, useEffect, useState } from "react";
 import "./Messages.scss";
 import Message from "../Message/Message";
-import ImagePerson from "../../../assets/img/PersonIcon.png";
-import AreaMessage from "../../UI/AreaMessage/AreaMessage";
-import ButtonIcon from "../../UI/ButtonIcon/ButtonIcon";
-import { PhotoIcon } from "../../Icons";
 import TextSenderWrapper from "../wrappers/TextSenderWrapper/TextSenderWrapper";
 import { getMessages, sendMessage } from "../../../http/messengerAPI";
 import PropTypes from "prop-types";
@@ -15,8 +11,8 @@ function Messages({ conversationId, conversationUser, user, socket }) {
   const lastName = conversationUser.lastName;
   const scroll = useRef();
   const scrollRef = useRef();
+  const [skip, setSkip] = useState(0);
   const [messages, setMessages] = useState([]);
-  const [textMessage, setTextMessage] = useState("");
   const sendMessageHandler = async ({ text }) => {
     const message = {
       conversationUser: conversationUser.user,
@@ -37,27 +33,55 @@ function Messages({ conversationId, conversationUser, user, socket }) {
       console.log(e);
     }
   };
-  useEffect(() => {
-    scrollRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages]);
 
   useEffect(() => {
-    const getMessage = (message) => {
-      console.log(message);
-      setMessages((prev) => [...prev, message]);
+    if (!scroll.current) {
+      return;
+    }
+    const scrollEvent = (e) => {
+      if (scroll.current.scrollTop < 1) {
+        setSkip((prev) => ++prev);
+      }
     };
-    console.log(socket);
-    socket.on("getMessage", getMessage);
-    if (!conversationId) {
+    scroll.current.addEventListener("scroll", scrollEvent);
+  }, [scroll]);
+  useEffect(() => {
+    if (skip < 1) {
       return;
     }
     const getMessagesHandle = async () => {
       try {
-        const res = await getMessages({ conversationId });
-        setMessages(res);
+        const res = await getMessages({ conversationId, limit: 15, skip });
+        console.log(res);
+        if (res.length > 0) {
+          setMessages((prev) => [...res, ...prev]);
+        }
       } catch (e) {}
     };
     getMessagesHandle();
+  }, [skip]);
+  useEffect(() => {
+    scrollRef.current?.scrollIntoView();
+  }, [messages]);
+
+  useEffect(() => {
+    setSkip(0);
+    const getMessagesHandle = async () => {
+      try {
+        const res = await getMessages({ conversationId, limit: 15, skip: 0 });
+        if (res.length > 0) {
+          setMessages(res);
+        }
+      } catch (e) {}
+    };
+    getMessagesHandle();
+    const getMessage = (message) => {
+      setMessages((prev) => [...prev, message]);
+    };
+    socket.on("getMessage", getMessage);
+    if (!conversationId) {
+      return;
+    }
   }, [conversationUser]);
   return (
     <div className="messages">

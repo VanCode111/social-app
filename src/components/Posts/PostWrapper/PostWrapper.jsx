@@ -10,7 +10,14 @@ import TextArea from "../../UI/TextArea/TextArea";
 import DeleteWrapper from "../../Wrappers/DeleteWrapper/DeleteWrapper";
 import PostPanel from "../../UI/PostPanel/PostPanel";
 
-function PostWrapper({ className, profile, authorLink, post, deletePost }) {
+function PostWrapper({
+  className,
+  profile,
+  authorLink,
+  post,
+  deletePost,
+  ownPage,
+}) {
   const [isEdit, setIsEdit] = useState(false);
   const text = post.text;
   const postPhoto = post.photo;
@@ -50,20 +57,25 @@ function PostWrapper({ className, profile, authorLink, post, deletePost }) {
     >
       {
         <Post
+          ownPage={ownPage}
           settings={
             <>
-              <CellButton onClick={editPost}>
-                <IconText
-                  icon={<MdDelete color="gray" size="1.5em" />}
-                  text="Редактировать"
-                />
-              </CellButton>
-              <CellButton onClick={deletePostHandle}>
-                <IconText
-                  icon={<MdDelete color="gray" size="1.5em" />}
-                  text="Удалить"
-                />
-              </CellButton>
+              {ownPage && (
+                <CellButton onClick={editPost}>
+                  <IconText
+                    icon={<MdDelete color="gray" size="1.5em" />}
+                    text="Редактировать"
+                  />
+                </CellButton>
+              )}
+              {ownPage && (
+                <CellButton onClick={deletePostHandle}>
+                  <IconText
+                    icon={<MdDelete color="gray" size="1.5em" />}
+                    text="Удалить"
+                  />
+                </CellButton>
+              )}
             </>
           }
           post={post}

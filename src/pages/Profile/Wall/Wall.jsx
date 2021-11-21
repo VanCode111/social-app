@@ -23,12 +23,10 @@ function Wall({ userId, postCreator, className }) {
       console.log(e);
     }
   };
-  console.log(posts);
   const deletePostHandle = async (index, postId) => {
     console.log(postId);
     try {
       const res = await deletePost({ postId });
-      console.log(res);
     } catch (e) {
       console.log(e);
     }
@@ -40,7 +38,6 @@ function Wall({ userId, postCreator, className }) {
       const posts = await getProfilePosts({ userId });
       setPosts(posts);
       setLoading(false);
-      console.log(posts);
     } catch (e) {
       console.log(e);
     }
@@ -57,7 +54,11 @@ function Wall({ userId, postCreator, className }) {
           <SyncLoader color="#00acff" loading={loading} size={50} />
         </div>
       ) : (
-        <Posts deletePost={deletePostHandle} posts={posts} />
+        <Posts
+          deletePost={deletePostHandle}
+          posts={posts}
+          ownPage={postCreator}
+        />
       )}
     </div>
   );

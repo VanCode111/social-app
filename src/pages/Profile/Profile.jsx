@@ -11,7 +11,6 @@ import { setImage } from "../../store/authSlice";
 
 function Profile({ user, link }) {
   const history = useHistory();
-  console.log("user", user);
   const [file, setFile] = useState(null);
   const dispatch = useDispatch();
   const userAuth = useSelector((store) => store.auth);
@@ -66,11 +65,14 @@ function Profile({ user, link }) {
                 </div>
               )}
             </div>
-            <Button
-              text="Написать сообщение"
-              onClick={sendMessage}
-              className="profile__sub"
-            />
+            {!ownPage && (
+              <Button
+                text="Написать сообщение"
+                onClick={sendMessage}
+                className="profile__sub"
+              />
+            )}
+
             {!ownPage && <Button text="Добавить" className="profile__sub" />}
           </div>
         }

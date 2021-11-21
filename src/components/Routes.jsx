@@ -39,7 +39,7 @@ function Routes() {
     return redirect;
   };
   const redirect = getRedirect(
-    isAuth ? "/feeds" : "/",
+    isAuth ? "/profile" : "/",
     [...routes, ...authRoutes],
     pathName
   );

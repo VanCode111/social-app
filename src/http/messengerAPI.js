@@ -13,9 +13,11 @@ const getConversation = async ({ userId, conversationUser }) => {
   return data;
 };
 
-const getMessages = async ({ conversationId }) => {
+const getMessages = async ({ conversationId, skip, limit }) => {
   const { data } = await $host.post("/getmessages", {
     conversationId,
+    skip,
+    limit,
   });
   return data;
 };

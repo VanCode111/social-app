@@ -1,6 +1,6 @@
 import React from "react";
 import "./Header.scss";
-import mainLogo from "../../assets/img/logo.svg";
+import mainLogo from "../../assets/img/logo2.svg";
 import { SearchBar, MenuTabs } from "../index";
 import SearchHelper from "../SearchHelper/SearchHelper";
 import {
@@ -23,7 +23,7 @@ function Header({ isAuth, user }) {
       icon: <ComunityIcon width="28" height="28" />,
     },
     {
-      path: "/comunitys",
+      path: "/comunity",
       icon: <BusyIcon width="28" height="28" />,
     },
     {

@@ -14,14 +14,6 @@ export const routes = [
 
 export const authRoutes = [
   {
-    path: "/comunity",
-    component: Comunity,
-  },
-  {
-    path: "/feeds",
-    component: Main,
-  },
-  {
     path: "/profile",
     component: Main,
   },
