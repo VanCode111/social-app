@@ -1,11 +1,8 @@
-require("dotenv").config();
-const express = require("express");
-
-const app = express();
-const server = require("http").Server(app);
-const io = require("socket.io")(server);
-
-const PORT = process.env.PORT || 8900;
+const io = require("socket.io")(7000, {
+  cors: {
+    origin: "http://localhost:3000",
+  },
+});
 
 let users = [];
 
@@ -58,8 +55,4 @@ io.on("connection", (socket) => {
     removeUser(socket.id);
     console.log(users);
   });
-});
-
-server.listen(PORT, () => {
-  console.log("server has been started");
 });
