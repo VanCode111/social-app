@@ -1,5 +1,5 @@
 const userModel = require("../models/user-model");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const tokenService = require("./tokenService");
 const routerModel = require("../models/router-model");
 const profileModel = require("../models/profile-model");
