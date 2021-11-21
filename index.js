@@ -1,7 +1,11 @@
+require("dotenv").config();
 const express = require("express");
+
 const app = express();
 const server = require("http").Server(app);
 const io = require("socket.io")(server);
+
+const PORT = process.env.PORT || 8900;
 
 let users = [];
 
@@ -56,6 +60,6 @@ io.on("connection", (socket) => {
   });
 });
 
-server.listen(8900, () => {
+server.listen(PORT, () => {
   console.log("server has been started");
 });
