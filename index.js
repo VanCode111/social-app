@@ -1,8 +1,7 @@
-const io = require("socket.io")(8900, {
-  cors: {
-    origin: "https://social-app-connectme.herokuapp.com",
-  },
-});
+const express = require("express");
+const app = express();
+const server = require("http").Server(app);
+const io = require("socket.io")(server);
 
 let users = [];
 
@@ -55,4 +54,8 @@ io.on("connection", (socket) => {
     removeUser(socket.id);
     console.log(users);
   });
+});
+
+server.listen(8900, () => {
+  console.log("server has been started");
 });
