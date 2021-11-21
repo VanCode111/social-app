@@ -4,10 +4,11 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const mongoose = require("mongoose");
 const app = express();
+const config = require("config");
 const router = require("./router/index");
 const expressUpload = require("express-fileupload");
 const path = require("path");
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || config.get("serverPort");
 
 app.use(express.static(path.resolve(__dirname, "static")));
 app.use(expressUpload());
