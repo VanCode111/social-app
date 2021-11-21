@@ -19,7 +19,7 @@ function Messenger() {
   const socket = useRef();
   const [conversation, setConversation] = useState(null);
   useEffect(() => {
-    socket.current = io("ws://localhost:8900");
+    socket.current = io("ws://immense-shore-19135.herokuapp.com");
     socket.current.emit("addUser", userId);
     socket.current.on("getMessage", (message) => {
       console.log(message);
