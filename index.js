@@ -1,8 +1,13 @@
-const io = require("socket.io")(process.env.PORT || 7000, {
+const app = require("express")();
+const server = require("http").createServer(app);
+const io = require("socket.io")(server, {
   cors: {
     origin: "http://localhost:3000",
+    methods: ["GET", "POST"],
   },
 });
+
+const PORT = process.env.PORT || 7000;
 
 let users = [];
 
@@ -33,6 +38,7 @@ const getUser = (userId) => {
 
 io.on("connection", (socket) => {
   //take userId and socketId from user
+  console.log("connection");
   socket.on("addUser", (userId) => {
     addUser(userId, socket.id);
   });
@@ -55,4 +61,8 @@ io.on("connection", (socket) => {
     removeUser(socket.id);
     console.log(users);
   });
+});
+
+server.listen(PORT, () => {
+  console.log("server has been started");
 });
