@@ -43,6 +43,50 @@ function Messages({
     }
   };
 
+  const renderMessages = () => {
+    if (loading) {
+      return (
+        <div className="post-loader">
+          <SyncLoader color="#00acff" loading={loading} size={25} />
+        </div>
+      );
+    }
+    if (messages.length < 1) {
+      return <p className="messages__no-message">Нет сообщений</p>;
+    }
+    return (
+      <div ref={scroll} className="messages__items">
+        {loading ? (
+          <div className="post-loader">
+            <SyncLoader color="#00acff" loading={loading} size={25} />
+          </div>
+        ) : (
+          messages.map((message) => {
+            return (
+              <div
+                ref={scrollRef}
+                className="messages__message"
+                key={message._id}
+              >
+                <Message
+                  orientation={message.sender == userId ? "right" : "left"}
+                  color={message.sender !== userId && "gray"}
+                  className=""
+                  authorImage={
+                    message.sender == userId
+                      ? user.profile.profileImage
+                      : conversationUser.profileImage
+                  }
+                  text={message.text}
+                />{" "}
+              </div>
+            );
+          })
+        )}
+      </div>
+    );
+  };
+
   useEffect(() => {
     if (!scroll.current) {
       return;
@@ -104,39 +148,7 @@ function Messages({
         </div>
       </div>
 
-      {!conversationId ? (
-        <p className="messages__no-message">Нет сообщений</p>
-      ) : (
-        <div ref={scroll} className="messages__items">
-          {loading ? (
-            <div className="post-loader">
-              <SyncLoader color="#00acff" loading={loading} size={25} />
-            </div>
-          ) : (
-            messages.map((message) => {
-              return (
-                <div
-                  ref={scrollRef}
-                  className="messages__message"
-                  key={message._id}
-                >
-                  <Message
-                    orientation={message.sender == userId ? "right" : "left"}
-                    color={message.sender !== userId && "gray"}
-                    className=""
-                    authorImage={
-                      message.sender == userId
-                        ? user.profile.profileImage
-                        : conversationUser.profileImage
-                    }
-                    text={message.text}
-                  />{" "}
-                </div>
-              );
-            })
-          )}
-        </div>
-      )}
+      {renderMessages()}
 
       <div className="messages__bottom">
         <TextSenderWrapper sendMessage={sendMessageHandler} />

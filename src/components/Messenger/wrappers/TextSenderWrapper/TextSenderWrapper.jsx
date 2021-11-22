@@ -5,6 +5,7 @@ import AreaMessage from "../../../UI/AreaMessage/AreaMessage";
 import classNames from "class-names";
 import ButtonIcon from "../../../UI/ButtonIcon/ButtonIcon";
 import { MessageIcon, PhotoIcon } from "../../../Icons";
+import SendIcon from "../../../Icons/SendIcon";
 import "./TextSenderWrapper.scss";
 
 function TextSenderWrapper({ sendMessage, className }) {
@@ -15,6 +16,7 @@ function TextSenderWrapper({ sendMessage, className }) {
   };
 
   const sendMessageHandle = () => {
+    setText("");
     sendMessage({ text });
   };
 
@@ -35,7 +37,7 @@ function TextSenderWrapper({ sendMessage, className }) {
       </div>
 
       <ButtonIcon onClick={sendMessageHandle}>
-        <MessageIcon />
+        <SendIcon />
       </ButtonIcon>
     </div>
   );

@@ -6,6 +6,7 @@ import Messages from "../../components/Messenger/Messages/Messages";
 import Template from "../../components/Template/Template";
 import Conversations from "../../components/Messenger/Conversations/Conversations";
 import { getConversation } from "../../http/messengerAPI";
+import { MessageIcon } from "../../components/Icons";
 import { io } from "socket.io-client";
 
 function Messenger() {
@@ -18,6 +19,7 @@ function Messenger() {
   const [loadingMessages, setLoadingMessages] = useState(false);
   const [loading, setLoading] = useState(true);
   const conversationUser = location.state?.conversationUser;
+  console.log(conversationUser);
   let conversationTitle;
   if (conversationUser) {
     conversationTitle = conversationUser.name + " " + conversationUser.lastName;
@@ -65,16 +67,18 @@ function Messenger() {
         mainPage={
           !loading &&
           (!conversation ? (
-            <div className="messenger__empty">Напишите сообщение</div>
+            <div className="messenger__empty">
+              {" "}
+              <MessageIcon />
+              <p>Выберите чат</p>
+            </div>
           ) : (
             <Messages
               loading={loadingMessages}
               conversationTitle={conversationTitle}
               socket={socket.current}
               {...conversation}
-              conversationUser={
-                conversationUser || conversation.conversationUser
-              }
+              //conversationId={conversationUser}
               user={user}
             />
           ))

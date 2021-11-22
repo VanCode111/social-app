@@ -4,22 +4,23 @@
   display: flex;
   padding: 0px 15px;
   align-items: flex-end;
-  min-height: 50px;
+  min-height: 30px;
+  position: relative;
   &__items {
     height: calc(100% - 50px);
   }
   &__others {
-    height: 100%;
-    padding: 15px;
+    position: absolute;
+    bottom: 5px;
+    right: 15px;
   }
   &__text-area {
     font-family: "Roboto";
     background-color: transparent;
     min-height: 100%;
     height: 200px !important;
-    padding: 15px 0px;
-    &::placeholder {
-    }
+    padding: 10px 0px;
+    padding-right: 30px;
     resize: none;
     outline: none;
     border: none;

@@ -16,6 +16,7 @@ function AreaMessage({
     <div className="area-message">
       {leftSide && leftSide}
       <TextArea
+        value={value}
         onChange={onChange}
         onHeightChange={onHeightChange}
         className="area-message__text-area"
