@@ -1,13 +1,16 @@
 const app = require("express")();
+const cors = require("cors");
 const server = require("http").createServer(app);
 const io = require("socket.io")(server, {
   cors: {
-    origin: "http://social-app-connectme.herokuapp.com",
+    origin: "https://social-app-connectme.herokuapp.com/",
     methods: ["GET", "POST"],
   },
 });
 
 const PORT = process.env.PORT || 7000;
+
+app.use(cors());
 
 let users = [];
 
