@@ -1,0 +1,23 @@
+.conversation-filter {
+  border: none;
+  background-color: transparent;
+  outline: none;
+}
+
+.conversationFilter {
+  display: flex;
+  gap: 3px;
+  cursor: text;
+  align-items: center;
+  border-radius: 18px;
+  background-color: #f6f6f6;
+  padding-left: 15px;
+  &__left-label {
+    width: 25px;
+    height: 25px;
+    & svg {
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
