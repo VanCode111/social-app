@@ -13,6 +13,7 @@ function Conversations() {
     try {
       const res = await getConversations({ userId });
       setConversations(res);
+      console.log(res);
     } catch (e) {
       console.log(e);
     }

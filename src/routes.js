@@ -18,12 +18,8 @@ export const authRoutes = [
     component: Main,
   },
   {
-    path: "/messenger",
-    component: Messenger,
-    layout: Main,
-  },
-  {
-    path: "/messenger/:id",
+    path: "/messenger/:id?",
+    exact: false,
     component: Messenger,
     layout: Main,
   },
@@ -37,10 +33,5 @@ export const mainRoutes = [
   {
     path: "/profile",
     component: Music,
-  },
-
-  {
-    path: "/messenger/:id",
-    component: Messenger,
   },
 ];

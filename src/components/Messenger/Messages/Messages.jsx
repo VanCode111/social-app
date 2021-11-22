@@ -4,12 +4,20 @@ import Message from "../Message/Message";
 import TextSenderWrapper from "../wrappers/TextSenderWrapper/TextSenderWrapper";
 import { getMessages, sendMessage } from "../../../http/messengerAPI";
 import PropTypes from "prop-types";
+import SyncLoader from "react-spinners/MoonLoader";
 
-function Messages({ conversationId, conversationUser, user, socket }) {
+function Messages({
+  conversationId,
+  conversationUser,
+  user,
+  socket,
+  conversationTitle,
+}) {
   const userId = user.profile.user;
   const name = conversationUser.name;
   const lastName = conversationUser.lastName;
   const scroll = useRef();
+  const [loading, setLoading] = useState(false);
   const scrollRef = useRef();
   const [skip, setSkip] = useState(0);
   const [messages, setMessages] = useState([]);
@@ -66,6 +74,7 @@ function Messages({ conversationId, conversationUser, user, socket }) {
   }, [messages]);
 
   useEffect(() => {
+    setLoading(true);
     setSkip(0);
     const getMessagesHandle = async () => {
       try {
@@ -74,6 +83,7 @@ function Messages({ conversationId, conversationUser, user, socket }) {
           setMessages(res);
         }
       } catch (e) {}
+      setLoading(false);
     };
     getMessagesHandle();
     const getMessage = (message) => {
@@ -88,7 +98,9 @@ function Messages({ conversationId, conversationUser, user, socket }) {
     <div className="messages">
       <div className="messages__top">
         <div className="messages__top-inner">
-          <h5 className="messages__title">{name + " " + lastName}</h5>
+          <h5 className="messages__title">
+            {conversationTitle || name + " " + lastName}
+          </h5>
         </div>
       </div>
 
@@ -96,27 +108,33 @@ function Messages({ conversationId, conversationUser, user, socket }) {
         <p className="messages__no-message">Нет сообщений</p>
       ) : (
         <div ref={scroll} className="messages__items">
-          {messages.map((message) => {
-            return (
-              <div
-                ref={scrollRef}
-                className="messages__message"
-                key={message._id}
-              >
-                <Message
-                  orientation={message.sender == userId ? "right" : "left"}
-                  color={message.sender !== userId && "gray"}
-                  className=""
-                  authorImage={
-                    message.sender == userId
-                      ? user.profile.profileImage
-                      : conversationUser.profileImage
-                  }
-                  text={message.text}
-                />{" "}
-              </div>
-            );
-          })}
+          {loading ? (
+            <div className="post-loader">
+              <SyncLoader color="#00acff" loading={loading} size={25} />
+            </div>
+          ) : (
+            messages.map((message) => {
+              return (
+                <div
+                  ref={scrollRef}
+                  className="messages__message"
+                  key={message._id}
+                >
+                  <Message
+                    orientation={message.sender == userId ? "right" : "left"}
+                    color={message.sender !== userId && "gray"}
+                    className=""
+                    authorImage={
+                      message.sender == userId
+                        ? user.profile.profileImage
+                        : conversationUser.profileImage
+                    }
+                    text={message.text}
+                  />{" "}
+                </div>
+              );
+            })
+          )}
         </div>
       )}
 

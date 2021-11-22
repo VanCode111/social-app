@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import "./Messenger.scss";
-import { useLocation } from "react-router-dom";
+import { useLocation, useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Messages from "../../components/Messenger/Messages/Messages";
 import Template from "../../components/Template/Template";
@@ -15,7 +15,14 @@ function Messenger() {
   const pathname = location.pathname;
   const pathNames = pathname.split("/");
   const conversationId = pathNames[2];
+  const [loadingMessages, setLoadingMessages] = useState(false);
   const [loading, setLoading] = useState(true);
+  const conversationUser = location.state?.conversationUser;
+  let conversationTitle;
+  if (conversationUser) {
+    conversationTitle = conversationUser.name + " " + conversationUser.lastName;
+  }
+
   const socket = useRef();
   const [conversation, setConversation] = useState(null);
   useEffect(() => {
@@ -30,6 +37,7 @@ function Messenger() {
   }, []);
   useEffect(async () => {
     document.title = "Сообщения";
+    setLoadingMessages(true);
     if (pathNames.length < 3) {
       setLoading(false);
       return;
@@ -43,6 +51,7 @@ function Messenger() {
     } catch (e) {
       console.log(e);
     }
+    setLoadingMessages(false);
     setLoading(false);
   }, [location]);
 
@@ -58,7 +67,16 @@ function Messenger() {
           (!conversation ? (
             <div className="messenger__empty">Напишите сообщение</div>
           ) : (
-            <Messages socket={socket.current} {...conversation} user={user} />
+            <Messages
+              loading={loadingMessages}
+              conversationTitle={conversationTitle}
+              socket={socket.current}
+              {...conversation}
+              conversationUser={
+                conversationUser || conversation.conversationUser
+              }
+              user={user}
+            />
           ))
         }
         otherCards={<Conversations />}

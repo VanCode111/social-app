@@ -10,23 +10,29 @@ function Routes() {
   const location = useLocation();
   const pathName = location.pathname;
   const renderRoutes = (routes) => {
-    routes = routes.map(({ path, component, layout = null }, index) => {
-      if (layout) {
+    routes = routes.map(
+      ({ path, component, layout = null, exact = true }, index) => {
+        if (layout) {
+          return (
+            <Route
+              key={index}
+              path={path}
+              exact
+              render={() =>
+                React.createElement(
+                  layout,
+                  null,
+                  React.createElement(component)
+                )
+              }
+            />
+          );
+        }
         return (
-          <Route
-            key={index}
-            exact={true}
-            path={path}
-            render={() =>
-              React.createElement(layout, null, React.createElement(component))
-            }
-          />
+          <Route key={index} exact={true} path={path} component={component} />
         );
       }
-      return (
-        <Route key={index} exact={true} path={path} component={component} />
-      );
-    });
+    );
     return routes;
   };
   const getRedirect = (redirectTo, routes, location) => {
@@ -43,7 +49,6 @@ function Routes() {
     [...routes, ...authRoutes],
     pathName
   );
-  console.log(redirect);
   return (
     <div className="routes">
       <Switch>

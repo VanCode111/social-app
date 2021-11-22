@@ -7,7 +7,13 @@ function Conversation({ conversationUser }) {
   const avatar = conversationUser.profileImage;
   const fullName = `${conversationUser.name} ${conversationUser.lastName}`;
   return (
-    <Link to={pathConversation} className="conversation">
+    <Link
+      to={{
+        pathname: pathConversation,
+        state: { conversationUser: conversationUser },
+      }}
+      className="conversation"
+    >
       <img src={avatar} alt="avatar" className="conversation__avatar" />
       <div className="conversation__right">
         <div className="conversation__right-top">
