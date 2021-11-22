@@ -28,6 +28,7 @@ function Messages({ conversationId, conversationUser, user, socket }) {
     ]);
     try {
       await sendMessage(message);
+      console.log(socket);
       socket?.emit("sendMessage", message);
     } catch (e) {
       console.log(e);
