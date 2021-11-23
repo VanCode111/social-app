@@ -11,7 +11,7 @@ class UserService {
     if (!user) {
       throw new Error("Неверный логин или пароль");
     }
-    if (!bcrypt.compare(user.password, password)) {
+    if (!bcrypt.compareSync(user.password, password)) {
       throw new Error("Неверный логин или пароль");
     }
     const userProtect = {

@@ -5,7 +5,7 @@ class FilesService {
   uploadImage(image) {
     const fileName = uuid.v4() + ".jpg";
     image.mv(path.resolve(__dirname, "..", "static", fileName));
-    const fileUrl = process.env.SERVER_URL + fileName;
+    const fileUrl = fileName;
     return fileUrl;
   }
 }
