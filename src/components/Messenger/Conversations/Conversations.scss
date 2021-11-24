@@ -3,6 +3,11 @@
   border-radius: 18px;
   height: 100%;
   padding: 15px 0px;
+  &__loader {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+  }
 
   &__filter {
     width: 100%;

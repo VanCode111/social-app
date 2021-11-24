@@ -51,7 +51,7 @@ function Wall({ userId, postCreator, className }) {
       {postCreator && <PostCard onClick={postCreate} />}
       {loading ? (
         <div className="post-loader">
-          <SyncLoader color="#00acff" loading={loading} size={50} />
+          <SyncLoader color="#00acff" loading={loading} size={30} />
         </div>
       ) : (
         <Posts

@@ -1,11 +1,16 @@
 import React from "react";
 import "./Message.scss";
 import PropTypes from "prop-types";
+import { SERVER_URL } from "../../../Config/serverConsts";
 
 function Message({ text, authorImage, datePublish, orientation, color }) {
   return (
     <div className={"message " + (orientation === "right" ? "right" : "left")}>
-      <img src={authorImage} alt="author" className="message avatar" />
+      <img
+        src={SERVER_URL + "/" + authorImage}
+        alt="author"
+        className="message avatar"
+      />
       <div className={"message__content " + (color ? color : "")}>
         <p className="message__text">{text}</p>
       </div>

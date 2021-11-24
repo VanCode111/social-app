@@ -6,15 +6,18 @@ import { Header } from "../../components";
 import Button from "../../components/UI/Button/Button";
 import { useDispatch } from "react-redux";
 import { setAuth, setUser } from "../../store";
+import { connectToSocket } from "../../sockets";
 
 function Auth() {
   const [email, setEmail] = useState("");
   const [isLogin, setIsLogin] = useState(true);
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
+  const [loading, setLoading] = useState(false);
   const [lastName, setLastName] = useState("");
   const dispatch = useDispatch();
   const authHandle = async () => {
+    setLoading(true);
     try {
       let res;
       if (isLogin) {
@@ -24,13 +27,14 @@ function Auth() {
       }
       dispatch(setAuth(true));
       dispatch(setUser({ profile: res.profile, link: "/" + res.router.path }));
-      console.log(res);
+      connectToSocket(res.profile.user);
     } catch (e) {
       if (e.response) {
         console.log(e.response.data);
       }
       console.log(e);
     }
+    setLoading(false);
   };
 
   const changeAuthPage = () => {
@@ -62,6 +66,7 @@ function Auth() {
               onClick={authHandle}
               className="auth__button"
               text="Войти"
+              loading={loading}
             />
             <div className="auth__bottom">
               <p className="auth__desc">
@@ -102,6 +107,7 @@ function Auth() {
               onClick={authHandle}
               className="auth__button"
               text="Войти"
+              loading={loading}
             />
             <div className="auth__bottom">
               <p className="auth__desc">

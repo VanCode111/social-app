@@ -1,18 +1,22 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import "./Conversations.scss";
 import Conversation from "../Conversation/Conversation";
 import { getConversations } from "../../../http/messengerAPI";
-import { MessageIcon } from "../../Icons";
 import ConversationFilter from "./ConversationFilter/ConversationFilter";
-import UserRow from "../../UserRow/UserRow";
 import SearchIcon from "../../Icons/SearchIcon";
+import SyncLoader from "react-spinners/MoonLoader";
+//import { setConversations } from "../../../store/index";
+import { setConversations } from "../../../store/conversationsSlice";
 
 function Conversations() {
   const { user } = useSelector((state) => state.auth);
+  const { conversations } = useSelector((state) => state.conversations);
   const userId = user.profile.user;
+  const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
   const [filterConversations, setFilterConversations] = useState("");
-  const [conversations, setConversations] = useState([]);
+  //const [conversations, setConversations] = useState([]);
   const filterConversationsHandle = () => {
     if (!filterConversations) {
       return conversations;
@@ -42,13 +46,14 @@ function Conversations() {
   let filteredConversations = filterConversationsHandle();
 
   useEffect(async () => {
+    setLoading(true);
     try {
       const res = await getConversations({ userId });
-      setConversations(res);
-      console.log(res);
+      dispatch(setConversations(res));
     } catch (e) {
       console.log(e);
     }
+    setLoading(false);
   }, []);
 
   return (
@@ -63,14 +68,27 @@ function Conversations() {
           }}
         />
       </div>
-
-      {filteredConversations.map((conversation) => {
-        return (
-          <div>
-            <Conversation conversationUser={conversation.conversationUser} />
-          </div>
-        );
-      })}
+      {loading ? (
+        <div className="conversations__loader">
+          <SyncLoader
+            color="#00acff"
+            loading={true}
+            size={20}
+            style={{ zIndex: 10 }}
+          />
+        </div>
+      ) : (
+        filteredConversations.map((conversation) => {
+          return (
+            <div>
+              <Conversation
+                lastMessage={conversation.lastMessage}
+                conversationUser={conversation.conversationUser}
+              />
+            </div>
+          );
+        })
+      )}
     </div>
   );
 }

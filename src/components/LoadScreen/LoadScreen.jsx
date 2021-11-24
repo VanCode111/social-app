@@ -1,12 +1,17 @@
 import React from "react";
 import "./LoadScreen.scss";
 import Logo from "../../assets/img/logo.svg";
-import ClipLoader from "react-spinners/HashLoader";
+import SyncLoader from "react-spinners/MoonLoader";
 
 function LoadScreen() {
   return (
     <div className="load-screen">
-      <ClipLoader color={"#00acff"} loading={true} size={100} />
+      <SyncLoader
+        color="#00acff"
+        loading={true}
+        size={30}
+        style={{ zIndex: 10 }}
+      />
     </div>
   );
 }

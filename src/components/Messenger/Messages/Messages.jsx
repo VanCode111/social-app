@@ -5,6 +5,7 @@ import TextSenderWrapper from "../wrappers/TextSenderWrapper/TextSenderWrapper";
 import { getMessages, sendMessage } from "../../../http/messengerAPI";
 import PropTypes from "prop-types";
 import SyncLoader from "react-spinners/MoonLoader";
+import { sendMessages, getMessagesSocket } from "../../../sockets";
 
 function Messages({
   conversationId,
@@ -36,8 +37,7 @@ function Messages({
     ]);
     try {
       await sendMessage(message);
-      console.log(socket);
-      socket?.emit("sendMessage", message);
+      sendMessages(message);
     } catch (e) {
       console.log(e);
     }
@@ -131,9 +131,10 @@ function Messages({
     };
     getMessagesHandle();
     const getMessage = (message) => {
+      console.log(message);
       setMessages((prev) => [...prev, message]);
     };
-    socket.on("getMessage", getMessage);
+    getMessagesSocket(getMessage);
     if (!conversationId) {
       return;
     }

@@ -3,10 +3,30 @@
   padding: 0px 15px;
   border-radius: 10px;
   font-weight: 500;
-  font-family: "Roboto", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 20px;
+  font-weight: 600;
   background-color: #00acff;
   color: white;
   cursor: pointer;
   border: none;
+  line-height: 100%;
+
+  display: block;
+  &.loading {
+    text-align: unset;
+    background-color: transparent;
+    border: 2px solid #00acff;
+  }
+}
+
+.btn-loader {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  //padding-top: 10px;
+  //margin-top: 100px;
 }

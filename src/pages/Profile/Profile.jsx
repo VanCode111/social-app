@@ -8,6 +8,7 @@ import { uploadImage } from "../../http/ProfileAPI";
 import Wall from "./Wall/Wall";
 import { useHistory } from "react-router-dom";
 import { setImage } from "../../store/authSlice";
+import { SERVER_URL } from "../../Config/serverConsts";
 
 function Profile({ user, link }) {
   const history = useHistory();
@@ -51,7 +52,11 @@ function Profile({ user, link }) {
               className="profile__avatar-wrapper"
               style={{
                 backgroundImage: `url(${
-                  file ? file : user ? user.profileImage : ""
+                  file
+                    ? SERVER_URL + "/" + file
+                    : user
+                    ? SERVER_URL + "/" + user.profileImage
+                    : ""
                 })`,
               }}
             >
