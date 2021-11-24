@@ -43,7 +43,7 @@ class UserService {
       name,
       lastName,
       fullName: `${name.toLowerCase()}${lastName.toLowerCase()}`,
-      profileImage: "http://localhost:5000/Avatar.jpg",
+      profileImage: "Avatar.jpg",
     });
     const userProtect = {
       id: user._id,
