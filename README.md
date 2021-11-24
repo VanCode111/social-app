@@ -1,10 +1,8 @@
-<<<<<<< HEAD
+[![Spectrum](./public/img/chatme.png)](https://social-app-two.vercel.app)
 
 # Getting Started with Create React App
 
 =======
-
-[Group 2](https://user-images.githubusercontent.com/71648558/143262483-6c1979e9-c438-4772-a48a-448a01d2265c.png)
 
 # Getting Started with Create React App!
 
