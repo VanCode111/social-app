@@ -5,7 +5,7 @@ import {
   addMessageToConversation,
 } from "./store/conversationsSlice";
 
-const socket = io("http://localhost:7000");
+const socket = io("https://immense-shore-19135.herokuapp.com/");
 const connectToSocket = (userId: string) => {
   socket.emit("addUser", userId);
   getMessagesSocket();
