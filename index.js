@@ -23,9 +23,6 @@ const addUser = (userId, socketId) => {
     }
   });
   const userObject = { userId, socketId };
-  if (indexUser) {
-    users[index] = userObject;
-  }
   users.push(userObject);
   console.log(users);
 };
@@ -34,8 +31,8 @@ const removeUser = (socketId) => {
   users = users.filter((user) => user.socketId !== socketId);
 };
 
-const getUser = (userId) => {
-  const onlineUser = users.find((user) => user.userId == userId);
+const getUsers = (userId) => {
+  const onlineUser = users.filter((user) => user.userId == userId);
   return onlineUser;
 };
 
@@ -48,13 +45,18 @@ io.on("connection", (socket) => {
 
   //send and get message
   socket.on("sendMessage", ({ user, conversationUser, text }) => {
-    const userCurr = getUser(conversationUser);
+    console.log(conversationUser, " ", text);
+    const userCurr = getUsers(conversationUser);
+    console.log("sended ", userCurr);
     if (!userCurr) {
       return;
     }
-    io.to(userCurr.socketId).emit("getMessage", {
-      sender: user,
-      text,
+    console.log("sended ", users);
+    userCurr.forEach((userCur) => {
+      io.to(userCur.socketId).emit("getMessage", {
+        sender: user,
+        message: text,
+      });
     });
   });
 
