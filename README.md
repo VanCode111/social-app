@@ -1,6 +1,14 @@
-[![Spectrum](./public/img/chatme.png)](https://spectrum.chat)
+<<<<<<< HEAD
 
 # Getting Started with Create React App
+
+=======
+
+[Group 2](https://user-images.githubusercontent.com/71648558/143262483-6c1979e9-c438-4772-a48a-448a01d2265c.png)
+
+# Getting Started with Create React App!
+
+> > > > > > > ac5772f36ffa9d40985edf5da8cefbcce9fd2aea
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
