@@ -11,7 +11,7 @@ class UserService {
     if (!user) {
       throw new Error("Неверный логин или пароль");
     }
-    const comparedPasswords = wait bcrypt.compare(user.password, password);
+    const comparedPasswords = await bcrypt.compare(user.password, password);
     if (!comparedPasswords) {
       throw new Error("Неверный логин или пароль");
     }
