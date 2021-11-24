@@ -7,9 +7,8 @@ class ProfileController {
       const { img } = req.files;
       const { userId } = req.body;
       let fileName = uuid.v4() + ".jpg";
-      console.log(userId);
       img.mv(path.resolve(__dirname, "..", "static", fileName));
-      const imageUrl = process.env.SERVER_URL + fileName;
+      const imageUrl = fileName;
       const profile = await profileModel.updateOne(
         { user: userId },
         { $set: { profileImage: imageUrl } }
