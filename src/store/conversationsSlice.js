@@ -21,8 +21,8 @@ const counterSlice = createSlice({
         );
         return item.conversationUser.user === action.payload.conversationId;
       });
-      console.log(conversation);
       if (!conversation) {
+        state.notReaded++;
         return;
       }
       if (!conversation.notReaded) {
