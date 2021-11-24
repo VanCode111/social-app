@@ -23,13 +23,19 @@ const sendMessages = (message: {
   socket.emit("sendMessage", message);
 };
 
-const getMessagesSocket = () => {
+const getMessagesSocket = (
+  getMessage?: (message: { text: string; sender: string }) => void
+) => {
   socket.on(
     "getMessage",
     ({ message, sender }: { message: string; sender: string }) => {
       store.dispatch(
         addMessageToConversation({ conversationId: sender, text: message })
       );
+      if (!getMessage) {
+        return;
+      }
+      getMessage({ text: message, sender });
     }
   );
 };
